@@ -60,7 +60,7 @@ const Profile = (props: Props) => {
     //validate email
     if (regexp.test(email)) {
       //invite the user via stytch
-      inviteUser(60, name, email)
+      inviteUser(email)
         .then((resp) => {
           console.log(resp);
           if (resp.status == 401) {
@@ -86,6 +86,7 @@ const Profile = (props: Props) => {
         })
         .catch((error) => {
           console.error('unable to invite user');
+          console.log(error)
         });
     } else {
       console.error('email is invalid');
@@ -147,6 +148,7 @@ const Profile = (props: Props) => {
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   var users: User[] = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
+  // var users: User[] = []
 
   // Get the user's session based on the request
   return {
