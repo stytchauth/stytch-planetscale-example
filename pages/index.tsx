@@ -1,11 +1,8 @@
 import { Stytch } from '@stytch/stytch-react';
 import styles from '../styles/Home.module.css';
-// import withSession, { ServerSideProps } from '../lib/withSession';
 import { ServerSideProps } from '../lib/StytchSession';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { LoginMethod } from '../lib/types';
-import LoginEntryPoint from '../components/LoginEntrypoint';
 
 const stytchProps = {
   config: {
@@ -52,8 +49,7 @@ type Props = {
 };
 
 const App = (props: Props) => {
-  const { user, publicToken } = props;
-  const [loginMethod, setLoginMethod] = React.useState<LoginMethod | null>(null);
+  const { user } = props;
   const router = useRouter();
 
   useEffect(() => {
@@ -62,8 +58,8 @@ const App = (props: Props) => {
     }
   });
 
-  const loginMethodMap: Record<LoginMethod, React.ReactElement> = {
-    [LoginMethod.SDK]: (
+  return (
+    <div className={styles.root}>
       <div className={styles.container}>
         <Stytch
           publicToken={process.env.STYTCH_PUBLIC_TOKEN || ''}
@@ -71,28 +67,10 @@ const App = (props: Props) => {
           style={stytchProps.style}
           callbacks={stytchProps.callbacks}
         />
-      </div>
-    ),
-  };
-
-  return (
-    <div className={styles.root}>
-      {loginMethod === null ? <LoginEntryPoint setLoginMethod={setLoginMethod} /> : loginMethodMap[loginMethod]}
+      </div>{' '}
     </div>
   );
 };
-
-// const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
-//   // Get the user's session based on the request
-//   const user = req.session.get('user') ?? null;
-//   const props: Props = {
-//     publicToken: stytchProps.publicToken,
-//     user,
-//   };
-//   return { props };
-// };
-
-// export const getServerSideProps = withSession(getServerSidePropsHandler);
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   // Get the user's session based on the request

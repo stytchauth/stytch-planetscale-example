@@ -15,8 +15,6 @@
     "lint"
   ],
   "dependencies": {
-    "@emotion/react": "^11.4.1",
-    "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/utils": "^4.11.2",
@@ -26,13 +24,9 @@
     "cookie": "^0.4.1",
     "cookies": "^0.8.0",
     "material-icons": "^1.5.1",
-    "mysql": "^2.18.1",
     "next": "11.1.2",
-    "next-auth": "^3.29.0",
-    "next-iron-session": "^4.2.0",
     "planetscale-node": "^0.1.0",
     "react": "17.0.2",
-    "react-cookie": "^4.1.1",
     "react-dom": "17.0.2",
     "stytch": "^3.2.0"
   },
