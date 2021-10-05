@@ -1,10 +1,8 @@
 import { Stytch } from '@stytch/stytch-react';
 import styles from '../styles/Home.module.css';
-// import withSession, { ServerSideProps } from '../lib/withSession';
 import { ServerSideProps } from '../lib/StytchSession';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import LoginEntryPoint from '../components/LoginEntrypoint';
 
 const stytchProps = {
   config: {
@@ -51,8 +49,7 @@ type Props = {
 };
 
 const App = (props: Props) => {
-  const { user, publicToken } = props;
-  const [loginMethod, setLoginMethod] = React.useState(null);
+  const { user } = props;
   const router = useRouter();
 
   useEffect(() => {
@@ -61,7 +58,8 @@ const App = (props: Props) => {
     }
   });
 
-  const emailLogin =  (
+  return (
+    <div className={styles.root}>
       <div className={styles.container}>
         <Stytch
           publicToken={process.env.STYTCH_PUBLIC_TOKEN || ''}
@@ -69,12 +67,7 @@ const App = (props: Props) => {
           style={stytchProps.style}
           callbacks={stytchProps.callbacks}
         />
-      </div>
-    )
-
-  return (
-    <div className={styles.root}>
-      {loginMethod === null ? <LoginEntryPoint setLoginMethod={setLoginMethod} /> : emailLogin}
+      </div>{' '}
     </div>
   );
 };
