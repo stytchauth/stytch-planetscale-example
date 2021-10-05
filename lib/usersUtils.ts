@@ -1,5 +1,5 @@
 import { User } from '../pages/api/users/';
-import {BASE_URL} from './constants'
+import { BASE_URL } from './constants';
 
 export async function getUserById(id: number) {
   const resp = await fetch(`${BASE_URL}/api/users/${id}`, {
@@ -25,7 +25,7 @@ export async function addUser(name: string, email: string, password: string) {
       email: email,
       password: password,
     }),
-  }); 
+  });
   const data = await resp.json();
   return data;
 }
@@ -41,18 +41,18 @@ export async function addUser(name: string, email: string, password: string) {
 // }
 
 // export const fetchProjectUsersByProjectId = async (projectId: string): Promise<Array<ProjectUser>> => {
-  export const getUsers = async (token: string): Promise<Array<User>> => {
-    const resp = await fetch(`${BASE_URL}/api/users?token=${token}`, {
-      method: 'GET',
-     })
-    const data = await resp.json()
-  
-    return data
-  }
+export const getUsers = async (token: string): Promise<Array<User>> => {
+  const resp = await fetch(`${BASE_URL}/api/users?token=${token}`, {
+    method: 'GET',
+  });
+  const data = await resp.json();
 
-export  const signOut = async () => {
-    const resp = await fetch('/api/logout', { method: 'POST' });
-    if (resp.status === 200) {
-      router.push('/');
-    }
-  };
+  return data;
+};
+
+export const signOut = async () => {
+  const resp = await fetch('/api/logout', { method: 'POST' });
+  if (resp.status === 200) {
+    router.push('/');
+  }
+};
