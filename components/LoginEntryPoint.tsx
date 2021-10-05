@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from '../styles/Home.module.css';
-import { LoginMethod } from '../lib/types';
 import StytchContainer from './StytchContainer';
 
 type Props = {
-  setLoginMethod: (loginMethod: LoginMethod) => void;
+  setLoginMethod: () => void;
 };
 
 const LoginEntryPoint = (props: Props) => {
@@ -13,7 +12,7 @@ const LoginEntryPoint = (props: Props) => {
   return (
     <StytchContainer>
       <h2>Login or Signup</h2>
-      <button className={styles.entryButton} onClick={() => setLoginMethod(LoginMethod.SDK)}>
+      <button className={styles.entryButton} onClick={() => setLoginMethod()}>
         Continue with email
       </button>
     </StytchContainer>
