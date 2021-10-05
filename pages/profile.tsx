@@ -17,9 +17,9 @@ const Profile = (props: Props) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!token) {
-      router.replace('/');
-    }
+    // if (!token) {
+    //   router.replace('/');
+    // }
   });
 
 
@@ -30,7 +30,9 @@ const Profile = (props: Props) => {
     }
   };
 
+  console.log("inside profile")
   return (
+        <>
         <div>
         <StytchContainer>
           <h1> Hello World</h1>
@@ -38,7 +40,8 @@ const Profile = (props: Props) => {
           <button className={styles.primaryButton} onClick={signOut}>
             Sign out
           </button>
-        </div>
+          </div>
+        </>
   );
 };
 
