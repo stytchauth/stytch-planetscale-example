@@ -8,10 +8,6 @@ type Props = {
   token?: string;
 };
 
-
-
-// const users = async (): Promise<User[]> => { return getUsers()};
-
 const Profile = (props: Props) => {
   const { token } = props;
   const router = useRouter();
@@ -22,7 +18,6 @@ const Profile = (props: Props) => {
     // }
   });
 
-
   const signOut = async () => {
     const resp = await fetch('/api/logout', { method: 'POST' });
     if (resp.status === 200) {
@@ -30,29 +25,29 @@ const Profile = (props: Props) => {
     }
   };
 
-  console.log("inside profile")
+  console.log('inside profile');
   return (
-        <>
-        <div>
+    <>
+      <div>
         <StytchContainer>
           <h1> Hello World</h1>
-          </StytchContainer>
-          <button className={styles.primaryButton} onClick={signOut}>
-            Sign out
-          </button>
-          </div>
-        </>
+        </StytchContainer>
+        <button className={styles.primaryButton} onClick={signOut}>
+          Sign out
+        </button>
+      </div>
+    </>
   );
 };
 
-
-
-const getServerSidePropsHandler: ServerSideProps = async ({ req}) => {  
+const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   // Get the user's token based on the request
-  return { props : { 
-    token: req.cookies[process.env.COOKIE_NAME as string] || ""} };
+  return {
+    props: {
+      token: req.cookies[process.env.COOKIE_NAME as string] || '',
+    },
+  };
 };
-
 
 export const getServerSideProps = getServerSidePropsHandler;
 
