@@ -28,7 +28,7 @@ async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
 
   var email = req.body.email;
 
-  // params are of type stytch.LoginOrCreateRequest
+  // params are of type stytch.InviteByEmailRequest
   const params = {
     email: email,
     login_magic_link_url: `${BASE_URL}/api/authenticate_magic_link`,

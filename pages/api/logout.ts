@@ -13,7 +13,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
         .status(200)
         .setHeader('Set-Cookie', serialize(process.env.COOKIE_NAME as string, '', { path: '/', maxAge: -1 }));
     } catch (error) {
-      res.status(400).json({ error });
+      res.status(400).json({ error: error as string});
     }
   }
 }
