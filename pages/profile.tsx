@@ -147,14 +147,18 @@ const Profile = (props: Props) => {
 };
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
+  var temp: User[] = []
   var users: User[] = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
-  // var users: User[] = []
+
+  if(users.length == 0 ) {
+    users = []
+  }
 
   // Get the user's session based on the request
   return {
     props: {
       token: req.cookies[process.env.COOKIE_NAME as string] || '',
-      users: users,
+      users: temp,
     },
   };
 };

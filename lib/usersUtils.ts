@@ -30,22 +30,14 @@ export async function addUser(name: string, email: string, password: string) {
   return data;
 }
 
-// // export const fetchProjectUsersByProjectId = async (projectId: string): Promise<Array<ProjectUser>> => {
-// export const getUsers = async (): Promise<Array<User>> => {
-//   const resp = await fetch(`${BASE_URL}/api/users`, {
-//     method: 'GET',
-//    })
-//   const data = await resp.json()
-
-//   return data
-// }
-
-// export const fetchProjectUsersByProjectId = async (projectId: string): Promise<Array<ProjectUser>> => {
 export const getUsers = async (token: string): Promise<Array<User>> => {
   const resp = await fetch(`${BASE_URL}/api/users?token=${token}`, {
     method: 'GET',
   });
   const data = await resp.json();
+
+  console.log("Data = ",data)
+
 
   return data;
 };

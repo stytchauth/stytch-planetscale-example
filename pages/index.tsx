@@ -29,9 +29,9 @@ const stytchProps = {
     width: '321px',
   },
   publicToken: process.env.STYTCH_PUBLIC_TOKEN || '',
+  url: process.env.REACT_APP_STYTCH_JS_SDK_URL || 'https://js.stytch.com/stytch.js',
   callbacks: {
     onEvent: (data: any) => {
-      // TODO: check whether the user exists in your DB
       if (data.eventData.type === 'USER_EVENT_TYPE') {
         console.log({
           userId: data.eventData.userId,
@@ -52,7 +52,7 @@ type Props = {
 };
 
 const App = (props: Props) => {
-  const { user, publicToken } = props;
+  const { user, publicToken, url } = props;
   const [loginMethod, setLoginMethod] = React.useState<LoginMethod | null>(null);
   const router = useRouter();
 
@@ -66,10 +66,11 @@ const App = (props: Props) => {
     [LoginMethod.SDK]: (
       <div className={styles.container}>
         <Stytch
-          publicToken={process.env.STYTCH_PUBLIC_TOKEN || ''}
+          publicToken={stytchProps.publicToken}
           config={stytchProps.config}
           style={stytchProps.style}
           callbacks={stytchProps.callbacks}
+          _url={stytchProps.url}
         />
       </div>
     ),
@@ -81,18 +82,6 @@ const App = (props: Props) => {
     </div>
   );
 };
-
-// const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
-//   // Get the user's session based on the request
-//   const user = req.session.get('user') ?? null;
-//   const props: Props = {
-//     publicToken: stytchProps.publicToken,
-//     user,
-//   };
-//   return { props };
-// };
-
-// export const getServerSideProps = withSession(getServerSidePropsHandler);
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   // Get the user's session based on the request
