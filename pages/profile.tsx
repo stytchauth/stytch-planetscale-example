@@ -1,17 +1,11 @@
 import React, { useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import StytchContainer from '../components/StytchContainer';
-import Notification from '../components/Notification';
-import UsersTable from '../components/UsersTable';
-import { User } from '../pages/api/users/';
 import { ServerSideProps } from '../lib/StytchSession';
-import {inviteUser} from '../lib/inviteUtils'
-import { getUsers, addUser, deleteUserById,  } from '../lib/usersUtils';
 import { useRouter } from 'next/router';
 
 type Props = {
   token?: string;
-  users?: User[];
 };
 
 
@@ -37,20 +31,14 @@ const Profile = (props: Props) => {
   };
 
   return (
-    <>
-      {!token ? (
-        <div></div>
-      ) : (
         <div>
         <StytchContainer>
-     
+          <h1> Hello World</h1>
           </StytchContainer>
           <button className={styles.primaryButton} onClick={signOut}>
             Sign out
           </button>
         </div>
-      )}
-    </>
   );
 };
 

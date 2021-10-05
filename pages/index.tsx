@@ -2,7 +2,6 @@ import { Stytch } from '@stytch/stytch-react';
 import styles from '../styles/Home.module.css';
 // import withSession, { ServerSideProps } from '../lib/withSession';
 import { ServerSideProps } from '../lib/StytchSession';
-import LoginWithSMS from '../components/LoginWithSMS';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { LoginMethod } from '../lib/types';
@@ -64,7 +63,6 @@ const App = (props: Props) => {
   });
 
   const loginMethodMap: Record<LoginMethod, React.ReactElement> = {
-    [LoginMethod.API]: <LoginWithSMS />,
     [LoginMethod.SDK]: (
       <div className={styles.container}>
         <Stytch

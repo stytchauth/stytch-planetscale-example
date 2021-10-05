@@ -3,8 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { Session } from 'next-iron-session';
 // import withSession from '../../lib/withSession';
 import loadStytch from '../../lib/loadStytch';
-import Cookies from 'cookies';
-import {serialize} from 'cookie';
 
 
 type NextIronRequest = NextApiRequest & { session: Session };
