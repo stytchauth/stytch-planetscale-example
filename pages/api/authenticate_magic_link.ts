@@ -1,16 +1,12 @@
 // This API route authenticates a Stytch magic link.
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Session } from 'next-iron-session';
-// import withSession from '../../lib/withSession';
 import loadStytch from '../../lib/loadStytch';
-
-type NextIronRequest = NextApiRequest & { session: Session };
 
 type Data = {
   error: string;
 };
 
-export async function handler(req: NextIronRequest, res: NextApiResponse<Data>) {
+export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method === 'GET') {
     const client = loadStytch();
     const { token } = req.query;
