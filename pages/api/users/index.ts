@@ -1,8 +1,6 @@
-import { ClassNames } from '@emotion/react';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PSDB } from 'planetscale-node';
-import { validSession, validSessionToken } from '../../../lib/StytchSession';
-import Cookies from 'cookies';
+import { validSessionToken } from '../../../lib/StytchSession';
 
 const conn = new PSDB('main');
 
@@ -15,14 +13,25 @@ export interface User {
 
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
   var token = (req.query['token'] || req.cookies[process.env.COOKIE_NAME as string]) as string;
-  if (!validSessionToken(token)) {
+
+  //validate session
+  var isValidSession = await validSessionToken(token);
+  if (!isValidSession) {
+    console.log('validating session');
+    const resp = await fetch('/api/logout', { method: 'POST' });
+    if (resp.status != 200) {
+      console.error('failed to logout');
+      console.log(resp.json());
+    }
+    console.log(resp.json());
+
     res.status(401).json({ error: 'unauthorized' });
-    console.log('failed to validate');
+
     return;
   }
-  console.log('validated');
 
   if (req.method == 'GET') {
+    console.log(req.url)
     getUsers(conn, req, res);
   } else if (req.method == 'POST') {
     addUser(conn, req, res);

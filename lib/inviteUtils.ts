@@ -10,12 +10,6 @@ export async function inviteUser(email: string) {
     }),
   });
 
-  console.log(resp.json())
-
-  if (!resp.ok) {
-    throw new Error('unable to invite user');
-  }
-
   const data = await resp.json();
   return data;
 }

@@ -18,8 +18,6 @@ var regexp = new RegExp(
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 );
 
-// const users = async (): Promise<User[]> => { return getUsers()};
-
 const Profile = (props: Props) => {
   const { token, users } = props;
   const router = useRouter();
@@ -30,7 +28,7 @@ const Profile = (props: Props) => {
   const [deleteOpen, setDeleteOpen] = React.useState(false);
   const [usersState, setUsers] = React.useState(users);
   useEffect(() => {
-    if (!token) {
+    if (token == '') {
       router.replace('/');
     }
   });
@@ -86,7 +84,7 @@ const Profile = (props: Props) => {
         })
         .catch((error) => {
           console.error('unable to invite user');
-          console.log(error)
+          console.log(error);
         });
     } else {
       console.error('email is invalid');
@@ -95,19 +93,21 @@ const Profile = (props: Props) => {
 
   function deleteUser(id: number) {
     //remove user fromt the DB
-    deleteUserById(id).then((resp) => {
-      if (resp.status == 401) {
-        router.push('/');
-      }
-    });
-
-    //remove user from the list
-    usersState?.forEach((element, index) => {
-      if (element.id == id) usersState.splice(index, 1);
-    });
-
-    setUsers(usersState);
-    toggleDelete();
+    deleteUserById(id)
+      .then((resp) => {
+        if (resp.status == 401) {
+          router.push('/');
+        }
+        //remove user from the list
+        usersState?.forEach((element, index) => {
+          if (element.id == id) usersState.splice(index, 1);
+          setUsers(usersState);
+          toggleDelete();
+        });
+      })
+      .catch((error) => {
+        console.error('failed to delete user');
+      });
   }
 
   const signOut = async () => {
@@ -119,7 +119,7 @@ const Profile = (props: Props) => {
 
   return (
     <>
-      {!token ? (
+      {token == '' ? (
         <div></div>
       ) : (
         <div id="container">
@@ -147,18 +147,13 @@ const Profile = (props: Props) => {
 };
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
-  var temp: User[] = []
   var users: User[] = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
-
-  if(users.length == 0 ) {
-    users = []
-  }
 
   // Get the user's session based on the request
   return {
     props: {
       token: req.cookies[process.env.COOKIE_NAME as string] || '',
-      users: temp,
+      users: users,
     },
   };
 };

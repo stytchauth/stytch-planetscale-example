@@ -6,15 +6,16 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { LoginMethod } from '../lib/types';
 import LoginEntryPoint from '../components/LoginEntrypoint';
+import { BASE_URL } from '../lib/constants';
 
 const stytchProps = {
   config: {
     loginConfig: {
-      magicLinkUrl: `http://localhost:3000/api/authenticate_magic_link`,
+      magicLinkUrl: `${BASE_URL}/api/authenticate_magic_link`,
       expirationMinutes: 30,
     },
     createUserConfig: {
-      magicLinkUrl: `http://localhost:3000/api/authenticate_magic_link`,
+      magicLinkUrl: `${BASE_URL}/api/authenticate_magic_link`,
       expirationMinutes: 30,
     },
   },
@@ -45,19 +46,16 @@ const stytchProps = {
 };
 
 type Props = {
-  publicToken: string;
-  user: {
-    id: string;
-  };
+  token: string;
 };
 
 const App = (props: Props) => {
-  const { user, publicToken, url } = props;
+  const { token } = props;
   const [loginMethod, setLoginMethod] = React.useState<LoginMethod | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
+    if (token != '') {
       router.push('/profile');
     }
   });

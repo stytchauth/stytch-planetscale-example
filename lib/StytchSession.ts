@@ -1,26 +1,25 @@
 import loadStytch from './loadStytch';
-import { NextApiRequest, NextApiResponse } from 'next';
-import Cookies from 'cookies';
-import { FlashOffRounded } from '@mui/icons-material';
+import { NextApiRequest } from 'next';
 
 const client = loadStytch();
-type APIHandler = (req: NextApiRequest, res: NextApiResponse<any>) => Promise<any>;
-export type ServerSideProps = ({ req }: { req: NextApiRequest }) => Promise<any>;
 
-export function validSessionToken(token: string): boolean {
+export async function validSessionToken(token: string): Promise<boolean> {
   //authenticate the session
-  var output: boolean = false;
-  client.sessions
-    .authenticate({ session_token: token })
-    .then((sessionAuthResp) => {
-      if (sessionAuthResp.status_code != BigInt(200)) {
-        output = false;
-      }
-      output = true;
-    })
-    .catch((err) => {
-      console.error('Failed to validate session. Token = ', token, err);
-      output = false;
-    });
-  return output;
+
+  try {
+    const sessionAuthResp = await client.sessions.authenticate({ session_token: token });
+
+    if (sessionAuthResp.status_code != BigInt(200)) {
+      console.log('Failed to validate session');
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Failed to validate session. Token = ', token);
+    console.log(error);
+    return false;
+  }
 }
+
+export type ServerSideProps = ({ req }: { req: NextApiRequest }) => Promise<any>;

@@ -1,16 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PSDB } from 'planetscale-node';
 import { validSessionToken } from '../../../../lib/StytchSession';
+import {BASE_URL} from "../../../../lib/constants"
 
 const conn = new PSDB('main');
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
   var token = (req.query['token'] || req.cookies[process.env.COOKIE_NAME as string]) as string;
-  if (!validSessionToken(token)) {
+
+  //validate session
+  var isValidSession = await validSessionToken(token);
+  if (!isValidSession) {
+    console.log("not a valid session")
+    console.log(req.url)
+    const resp = await fetch(`${BASE_URL}/api/logout`, { method: 'POST' });
+    if (resp.status != 200) {
+      console.error('failed to logout');
+      console.log(resp.json());
+    }
+
     res.status(401).json({ error: 'unauthorized' });
-    console.log('failed to validate');
     return;
   }
-  console.log('validated');
+
   if (req.method == 'GET') {
     getUser(conn, req, res);
   } else if (req.method == 'DELETE') {

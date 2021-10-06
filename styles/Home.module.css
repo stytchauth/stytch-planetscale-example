@@ -37,7 +37,7 @@
 }
 
 .image{
-  background-color: black;
+  opacity: 60%;
   padding:50px;
   height:50px;
   min-width: 10%;
@@ -46,6 +46,9 @@
   max-height:10%;
 }
 
+.ampersand{
+  opacity: 60%;
+}
 .primaryButton {
   background-color: #19303D;
   position: relative;

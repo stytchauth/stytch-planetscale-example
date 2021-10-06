@@ -36,8 +36,7 @@ export const getUsers = async (token: string): Promise<Array<User>> => {
   });
   const data = await resp.json();
 
-  console.log("Data = ",data)
-
+  console.log('Data = ', data);
 
   return data;
 };

@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { validSessionToken } from '../../lib/StytchSession';
 import loadStytch from '../../lib/loadStytch';
-import Router from 'next/router';
 
 type Data = {
   error: string;
@@ -40,6 +39,7 @@ function inviteUser(req: NextApiRequest, res: NextApiResponse) {
     })
     .catch((error) => {
       console.error('Failed invite user');
+      console.log(error);
       res.status(400).json({ error });
     });
   return;

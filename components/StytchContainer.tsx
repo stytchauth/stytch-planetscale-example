@@ -4,7 +4,6 @@ import Image from 'next/image';
 import stytch from '/public/powered-by-stytch.svg';
 import planetscale from '/public/powered-by-planetscale.png';
 
-
 type Props = {
   children: React.ReactElement | React.ReactElement[];
 };
@@ -16,8 +15,8 @@ const StytchContainer = (props: Props) => {
       <div>{children}</div>
       <div className="watermark">
         <Image alt="Powered by Stytch" height={15} src={stytch} width={250} />
-        <p> and </p>
-        <Image className="image" alt="Powered by Planetscale"  src={planetscale} height={30} width={200} />
+        <p className={styles.ampersand}> & </p>
+        <Image className={styles.image} alt="Powered by Planetscale" src={planetscale} height={25} width={175} />
       </div>
     </div>
   );
