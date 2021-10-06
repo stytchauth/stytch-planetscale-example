@@ -1,16 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { validSessionToken } from '../../lib/StytchSession';
 import loadStytch from '../../lib/loadStytch';
-import { BASE_URL } from '../../lib/constants';
 
 type Data = {
   error: string;
+  status: number;
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   var token = (req.query['token'] || req.cookies[process.env.COOKIE_NAME as string]) as string;
-  if (!validSessionToken(token)) {
-    res.redirect('/');
+
+  //validate user session
+  const isValidSession = await validSessionToken(token);
+  if (!isValidSession) {
+    res.status(401).json({ error: 'user unauthenticated', status: 401 });
     return;
   }
 
@@ -29,8 +32,8 @@ function inviteUser(req: NextApiRequest, res: NextApiResponse) {
   // params are of type stytch.InviteByEmailRequest
   const params = {
     email: email,
-    login_magic_link_url: `${BASE_URL}/api/authenticate_magic_link`,
-    signup_magic_link_url: `${BASE_URL}/api/authenticate_magic_link`,
+    login_magic_link_url: `http://localhost:3000/api/authenticate_magic_link`,
+    signup_magic_link_url: `http://localhost:3000/api/authenticate_magic_link`,
   };
 
   client.magicLinks.email
