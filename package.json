@@ -1,0 +1,44 @@
+{
+  "name": "stytch-planetscale-integration",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "prettier": "prettier --write pages/ lib/ components/"
+  },
+  "pre-commit": [
+    "precommit-msg",
+    "lint"
+  ],
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/utils": "^4.11.2",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.2",
+    "@stytch/stytch-react": "^1.1.6",
+    "cookie": "^0.4.1",
+    "cookies": "^0.8.0",
+    "material-icons": "^1.5.1",
+    "next": "11.1.2",
+    "planetscale-node": "^0.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "stytch": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.15",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "@typescript-eslint/parser": "^4.29.0",
+    "eslint": "^7.31.0",
+    "eslint-config-next": "11.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "2.3.2",
+    "typescript": "^4.3.5"
+  }
+}
