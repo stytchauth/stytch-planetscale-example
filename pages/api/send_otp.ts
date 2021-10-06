@@ -6,7 +6,7 @@ type Data = {
   methodId: string;
 };
 
-export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const client = loadStytch();
     const data = JSON.parse(req.body);

@@ -6,7 +6,7 @@ import UsersTable from '../components/UsersTable';
 import { User } from '../pages/api/users/';
 import { ServerSideProps } from '../lib/StytchSession';
 import { inviteUser } from '../lib/inviteUtils';
-import { getUsers, addUser, deleteUserById } from '../lib/usersUtils';
+import { getUsers, addUser, deleteUserById, signOut } from '../lib/usersUtils';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -26,12 +26,7 @@ const Profile = (props: Props) => {
   const [email, setEmail] = React.useState('');
   const [submitOpen, setSubmitOpen] = React.useState(false);
   const [deleteOpen, setDeleteOpen] = React.useState(false);
-  const [usersState, setUsers] = React.useState(users);
-  useEffect(() => {
-    if (token == '') {
-      router.replace('/');
-    }
-  });
+  const [_, setUsers] = React.useState(users);
 
   function toggleOpenModal() {
     setOpen(!open);
@@ -45,75 +40,78 @@ const Profile = (props: Props) => {
     setDeleteOpen(!deleteOpen);
   }
 
-  function submitUser() {
-    //do nothing if empty
+  const destroy = async () => {
+    //destroy session
+    const signOutResp = await signOut();
+
+    //change url
+    if (signOutResp.status == 200) router.push('/');
+
+    return;
+  };
+
+  const submitUser = async () => {
+    //if the form is empty, close the modal
     if (name == '' || email == '') {
       toggleOpenModal();
       return;
     }
 
-    //close modal
-    toggleOpenModal();
-
     //validate email
-    if (regexp.test(email)) {
-      //invite the user via stytch
-      inviteUser(email)
-        .then((resp) => {
-          console.log(resp);
-          if (resp.status == 401) {
-            router.push('/');
-          }
-          //add user to table
-          addUser(name, email, 'temp')
-            .then((resp) => {
-              console.log(resp);
-              if (resp.status == 401) {
-                router.push('/');
-              }
-
-              let id = resp.id as number;
-              usersState?.push({ id: id, name: name, email: email } as User);
-              setUsers(users);
-              //opens popup
-              toggleSubmit();
-            })
-            .catch((error) => {
-              console.error('unable to add user');
-            });
-        })
-        .catch((error) => {
-          console.error('unable to invite user');
-          console.log(error);
-        });
-    } else {
+    if (!regexp.test(email)) {
       console.error('email is invalid');
+      return;
     }
-  }
 
-  function deleteUser(id: number) {
-    //remove user fromt the DB
-    deleteUserById(id)
-      .then((resp) => {
-        if (resp.status == 401) {
-          router.push('/');
-        }
-        //remove user from the list
-        usersState?.forEach((element, index) => {
-          if (element.id == id) usersState.splice(index, 1);
-          setUsers(usersState);
-          toggleDelete();
-        });
-      })
-      .catch((error) => {
-        console.error('failed to delete user');
+    //opens popup
+    toggleSubmit();
+
+    //invite the user via stytch
+    try {
+      const inviteResp = await inviteUser(email);
+
+      //log the user out if the response is 200
+      if (inviteResp.status == 401) {
+        destroy();
+        return;
+      }
+
+      //add user to DB
+      const addResp = await addUser(name, email, 'temp');
+
+      if (addResp.status != 200) {
+        console.error(addResp.error);
+        return;
+      }
+
+      //add user to list and update UI
+      let id = addResp.id as number;
+      users?.push({ id: id, name: name, email: email } as User);
+      setUsers(users);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteUser = async (id: number) => {
+    try {
+      const deleteUserResp = await deleteUserById(id);
+
+      if (deleteUserResp.status == 401) {
+        destroy();
+        return;
+      }
+
+      //find and delete user
+      users?.forEach((element, index) => {
+        if (element.id == id) users.splice(index, 1);
       });
-  }
 
-  const signOut = async () => {
-    const resp = await fetch('/api/logout', { method: 'POST' });
-    if (resp.status === 200) {
-      router.push('/');
+      //update UI
+      setUsers(users);
+      toggleDelete();
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -128,7 +126,7 @@ const Profile = (props: Props) => {
 
           <StytchContainer>
             <UsersTable
-              users={usersState}
+              users={users}
               setName={setName}
               setEmail={setEmail}
               deleteUser={deleteUser}

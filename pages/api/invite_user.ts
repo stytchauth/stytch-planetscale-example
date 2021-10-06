@@ -4,12 +4,16 @@ import loadStytch from '../../lib/loadStytch';
 
 type Data = {
   error: string;
+  status: number;
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   var token = (req.query['token'] || req.cookies[process.env.COOKIE_NAME as string]) as string;
-  if (!validSessionToken(token)) {
-    res.redirect('/');
+
+  //validate user session
+  const isValidSession = await validSessionToken(token);
+  if (!isValidSession) {
+    res.status(401).json({ error: 'user unauthenticated', status: 401 });
     return;
   }
 

@@ -31,7 +31,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method == 'GET') {
-    console.log(req.url)
+    console.log(req.url);
     getUsers(conn, req, res);
   } else if (req.method == 'POST') {
     addUser(conn, req, res);

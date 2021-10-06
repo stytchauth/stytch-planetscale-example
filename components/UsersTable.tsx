@@ -47,7 +47,7 @@ const UsersTable = (props: Props) => {
       </TableHead>
       <TableBody>
         {users.map((user) => (
-          <TableRow key={user.id.toString()} id={user.id}>
+          <TableRow key={user.id} id={user.id}>
             {' '}
             <TableCell> {user.name} </TableCell> <TableCell> {user.email} </TableCell>{' '}
             <TableCell>

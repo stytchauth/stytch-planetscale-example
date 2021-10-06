@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PSDB } from 'planetscale-node';
 import { validSessionToken } from '../../../../lib/StytchSession';
-import {BASE_URL} from "../../../../lib/constants"
+import { BASE_URL } from '../../../../lib/constants';
 
 const conn = new PSDB('main');
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -10,8 +10,8 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
   //validate session
   var isValidSession = await validSessionToken(token);
   if (!isValidSession) {
-    console.log("not a valid session")
-    console.log(req.url)
+    console.log('not a valid session');
+    console.log(req.url);
     const resp = await fetch(`${BASE_URL}/api/logout`, { method: 'POST' });
     if (resp.status != 200) {
       console.error('failed to logout');

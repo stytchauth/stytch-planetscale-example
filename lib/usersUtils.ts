@@ -43,7 +43,6 @@ export const getUsers = async (token: string): Promise<Array<User>> => {
 
 export const signOut = async () => {
   const resp = await fetch('/api/logout', { method: 'POST' });
-  if (resp.status === 200) {
-    router.push('/');
-  }
+  const data = await resp.json();
+  return data;
 };
