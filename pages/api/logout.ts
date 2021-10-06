@@ -9,10 +9,11 @@ type Data = {
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method === 'POST') {
     try {
-      console.log("logging out")
+
       // Set session
       res.setHeader('Set-Cookie', serialize(process.env.COOKIE_NAME as string, '', { path: '/', maxAge: -1 }));
-      // res.redirect('/');
+      res.redirect('/');
+      
     } catch (error) {
       res.status(400).json({ error });
     }
