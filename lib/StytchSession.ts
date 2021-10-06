@@ -10,14 +10,14 @@ export async function validSessionToken(token: string): Promise<boolean> {
     const sessionAuthResp = await client.sessions.authenticate({ session_token: token });
 
     if (sessionAuthResp.status_code != BigInt(200)) {
-      console.log('Failed to validate session');
+      console.error('Failed to validate session');
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('Failed to validate session. Token = ', token);
-    console.log(error);
+    console.log('Failed to validate session. Token = ', token);
+    console.error(error);
     return false;
   }
 }
