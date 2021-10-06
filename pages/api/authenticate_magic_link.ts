@@ -20,7 +20,8 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
         'Set-Cookie',
         serialize(process.env.COOKIE_NAME as string, resp.session_token as string, { path: '/' }),
       );
-      res.redirect('/profile');
+      res.redirect('/profile'); 
+      
       return;
     } catch (error) {
       console.error('Failed to login user', token);

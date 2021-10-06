@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { validSessionToken } from '../../lib/StytchSession';
 import loadStytch from '../../lib/loadStytch';
+import { BASE_URL } from '../../lib/constants';
 
 type Data = {
   error: string;
@@ -28,8 +29,8 @@ function inviteUser(req: NextApiRequest, res: NextApiResponse) {
   // params are of type stytch.InviteByEmailRequest
   const params = {
     email: email,
-    login_magic_link_url: `http://localhost:3000/api/authenticate_magic_link`,
-    signup_magic_link_url: `http://localhost:3000/api/authenticate_magic_link`,
+    login_magic_link_url: `${BASE_URL}/api/authenticate_magic_link`,
+    signup_magic_link_url: `${BASE_URL}/api/authenticate_magic_link`,
   };
 
   client.magicLinks.email
