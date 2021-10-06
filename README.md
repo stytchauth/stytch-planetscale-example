@@ -6,13 +6,13 @@ This example app was created to demonstrate a lightweight fullstack app using Pl
 
 Stytch
 ---
-![Stytch](./public/stytch.jpeg)
+<img src="./public/stytch.jpeg" alt="stytch" width="400"/>
 
 > Onboard, authenticate, and engage your users with Stytch’s APIs. Improve security and user experience with flexible, passwordless authentication solutions.
 
 Planetscale
 ---
-![Stytch](./public/planetscale.jpeg)
+<img src="./public/planetscale.jpeg" alt="planetscale" width="400"/>
 
 > PlanetScale is the only serverless database platform you can start in seconds and scale indefinitely.
 
