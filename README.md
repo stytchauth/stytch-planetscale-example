@@ -18,9 +18,9 @@ Planetscale
 
 
 # Getting Started
+---
+## Setting up Styth
 
-Setting up Styth
---
 After signing up for Stytch, you'll need your project's ID, secret, and public token. You can find these in the [API keys tab](https://stytch.com/dashboard/api-keys).
 
 Once you've gathered these values, add them to a new .env.local file.
@@ -33,8 +33,8 @@ cp .env.template .env.local
 
 Next, add `http://localhost:3000/api/authenticate_magic_link` as a login and signup magic link URL to the dashboard. Stytch, for security purposes, verifies your magic link URLs before they are sent. You can set these magic link URLs for your project in the [Magic link URLs tab](https://stytch.com/dashboard/magic-link-urls).
 
-Setting up Planetscale
----
+## Setting up Planetscale
+
 ###  Setup database
 - Install [Planetscale CLI](https://docs.planetscale.com/reference/planetscale-environment-setup) and authenticate the CLI
 ```sh
