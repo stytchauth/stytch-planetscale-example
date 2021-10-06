@@ -43,7 +43,7 @@ pscale database create <database>
 
 - Retreive the following credentials from the planetscale dashboard and update your `.env.local` with the credentials
 ```bash
-PLANETSCALE_TOKEN # The token which you create in the organization settings page
+PLANETSCALE_TOKEN # The service token which you create in the organization settings page
 PLANETSCALE_TOKEN_NAME # The id for the token
 PLANETSCALE_ORG # The name of your organization (user)
 PLANETSCALE_DB # The name of the database you would like to use
@@ -68,7 +68,7 @@ CREATE TABLE users (
 ```
 - Create a **deploy request** 
 ```bash
-# This is synonymous with opening a pull requests
+# This is synonymous with opening a pull request
 pscale deploy-request create <database> <branch> 
 ```
 - Find the `<deploy-request-number>`
