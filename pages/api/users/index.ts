@@ -17,22 +17,12 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
   //validate session
   var isValidSession = await validSessionToken(token);
   if (!isValidSession) {
-    console.log('validating session');
-    const resp = await fetch('/api/logout', { method: 'POST' });
-    if (resp.status != 200) {
-      console.error('failed to logout');
-      console.log(resp.json());
-    }
-    console.log(resp.json());
-
-    res.status(401).json({ error: 'unauthorized' });
-
+    res.status(401).json({ error: 'user unauthenticated', status: 401});
     return;
   }
 
   if (req.method == 'GET') {
-    console.log(req.url);
-    getUsers(conn, req, res);
+     getUsers(conn, req, res);
   } else if (req.method == 'POST') {
     addUser(conn, req, res);
   }
@@ -46,7 +36,8 @@ async function getUsers(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
 
     const [getRows, _] = await conn.query(query, '');
     res.status(200).json(getRows);
-  } catch (e) {
+  } catch (error) {
+    console.error(error) 
     res.status(500).json({ error: 'an error occurred' });
   }
   return;
@@ -61,7 +52,8 @@ async function addUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
 
     const [row, _] = await conn.query(query, params);
     res.status(201).json({ id: row.insertId });
-  } catch (e) {
+  } catch (error) {
+    console.error(error) 
     res.status(500).json({ error: 'an error occurred' });
   }
   return;

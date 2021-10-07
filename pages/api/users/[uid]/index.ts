@@ -10,15 +10,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
   //validate session
   var isValidSession = await validSessionToken(token);
   if (!isValidSession) {
-    console.log('not a valid session');
-    console.log(req.url);
-    const resp = await fetch(`${BASE_URL}/api/logout`, { method: 'POST' });
-    if (resp.status != 200) {
-      console.error('failed to logout');
-      console.log(resp.json());
-    }
-
-    res.status(401).json({ error: 'unauthorized' });
+    res.status(401).json({ error: 'user unauthenticated' });
     return;
   }
 
@@ -38,7 +30,8 @@ async function getUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
 
     const [getRows, _] = await conn.query(query, params);
     res.status(200).json(getRows);
-  } catch (e) {
+  } catch (error) {
+    console.error(error)
     res.status(500).json({ error: 'an error occurred' });
   }
   return;
@@ -52,7 +45,8 @@ async function deleteUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse)
 
     const [row, _] = await conn.query(query, params);
     res.status(200).json({ id: row.insertId });
-  } catch (e) {
+  } catch (error) {
+    console.error(error)
     res.status(500).json({ error: 'an error occurred' });
   }
   return;

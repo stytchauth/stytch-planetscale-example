@@ -1,7 +1,7 @@
 import { Stytch } from '@stytch/stytch-react';
 import styles from '../styles/Home.module.css';
-// import withSession, { ServerSideProps } from '../lib/withSession';
 import { ServerSideProps } from '../lib/StytchSession';
+import { BASE_URL } from '../lib/constants';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { LoginMethod } from '../lib/types';
@@ -60,8 +60,8 @@ const App = (props: Props) => {
     }
   });
 
-  const loginMethodMap: Record<LoginMethod, React.ReactElement> = {
-    [LoginMethod.SDK]: (
+  return (
+    <div className={styles.root}>
       <div className={styles.container}>
         <Stytch
           publicToken={stytchProps.publicToken}
@@ -70,13 +70,7 @@ const App = (props: Props) => {
           callbacks={stytchProps.callbacks}
           _url={stytchProps.url}
         />
-      </div>
-    ),
-  };
-
-  return (
-    <div className={styles.root}>
-      {loginMethod === null ? <LoginEntryPoint setLoginMethod={setLoginMethod} /> : loginMethodMap[loginMethod]}
+      </div>{' '}
     </div>
   );
 };
