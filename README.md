@@ -21,8 +21,6 @@ Planetscale
 ---
 ## Setting up Stytch
 
-## Setting up Stytch
----
 After signing up for Stytch, you'll need your project's ID, secret, and public token. You can find these in the [API keys tab](https://stytch.com/dashboard/api-keys).
 
 Once you've gathered these values, add them to a new .env.local file.
