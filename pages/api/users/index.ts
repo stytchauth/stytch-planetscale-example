@@ -8,7 +8,6 @@ const conn = new PSDB('main');
 export interface User {
   id: number;
   email: string;
-  password: string;
   name: string;
 }
 
@@ -48,7 +47,7 @@ async function getUsers(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
 async function addUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
   var user = JSON.parse(req.body);
   try {
-    var query = 'INSERT INTO users ( name, email, password) VALUES (?,?,?)';
+    var query = 'INSERT INTO users ( name, email) VALUES (?,?)';
     var params = Object.values(user);
 
     const [row, _] = await conn.query(query, params);
