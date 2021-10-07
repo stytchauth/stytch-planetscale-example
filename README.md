@@ -2,17 +2,24 @@
 
 This is a [Stytch](https://stytch.com) + [Planetscale](https://planetscale.com/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+This example app was created to demonstrate a lightweight fullstack app using Planetscale's serverless mysql database and Stytch's authentication + session management APIs.
+
 Stytch
 ---
+<img src="./public/stytch.jpeg" alt="stytch" width="400"/>
+
 > Onboard, authenticate, and engage your users with Stytch’s APIs. Improve security and user experience with flexible, passwordless authentication solutions.
 
 Planetscale
 ---
+<img src="./public/planetscale.jpeg" alt="planetscale" width="400"/>
+
 > PlanetScale is the only serverless database platform you can start in seconds and scale indefinitely.
 
-This example app was created to demonstrate a lightweight fullstack app using Planetscale's serverless mysql database and Stytch's authentication + session management APIs.
 
 # Getting Started
+---
+## Setting up Stytch
 
 ## Setting up Stytch
 ---
@@ -29,7 +36,6 @@ cp .env.template .env.local
 Next, add `http://localhost:3000/api/authenticate_magic_link` as a login and signup magic link URL to the dashboard. Stytch, for security purposes, verifies your magic link URLs before they are sent. You can set these magic link URLs for your project in the [Magic link URLs tab](https://stytch.com/dashboard/magic-link-urls).
 
 ## Setting up Planetscale
----
 
 ###  Setup database
 - Install [Planetscale CLI](https://docs.planetscale.com/reference/planetscale-environment-setup) and authenticate the CLI
