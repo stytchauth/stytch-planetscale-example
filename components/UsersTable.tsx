@@ -46,7 +46,8 @@ const UsersTable = (props: Props) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {users.map((user) => (
+        {
+       users != null ? (users.map((user) => (
           <TableRow key={user.id} id={user.id}>
             {' '}
             <TableCell> {user.name} </TableCell> <TableCell> {user.email} </TableCell>{' '}
@@ -56,7 +57,8 @@ const UsersTable = (props: Props) => {
               </IconButton>{' '}
             </TableCell>{' '}
           </TableRow>
-        ))}
+        ))) :(<div/>)
+        }
 
         <TableRow>
           <Button startIcon={<AddIcon />} onClick={toggle} size="small">

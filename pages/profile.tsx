@@ -6,20 +6,17 @@ import UsersTable from '../components/UsersTable';
 import { User } from '../pages/api/users/';
 import { ServerSideProps } from '../lib/StytchSession';
 import { inviteUser } from '../lib/inviteUtils';
-import { getUsers, addUser, deleteUserById, signOut } from '../lib/usersUtils';
+import { getUsers, addUser, deleteUserById, logout } from '../lib/usersUtils';
 import { useRouter } from 'next/router';
 
 type Props = {
   token?: string;
   users?: User[];
+  authenticated: boolean;
 };
 
-var regexp = new RegExp(
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-);
-
 const Profile = (props: Props) => {
-  const { token, users } = props;
+  const { users, authenticated } = props;
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState('');
@@ -42,10 +39,10 @@ const Profile = (props: Props) => {
 
   const destroy = async () => {
     //destroy session
-    const signOutResp = await signOut();
+    const logoutResp = await logout();
 
     //change url
-    if (signOutResp.status == 200) router.push('/');
+    if (logoutResp.status == 200) router.push('/');
 
     return;
   };
@@ -57,18 +54,14 @@ const Profile = (props: Props) => {
       return;
     }
 
-    //validate email
-    if (!regexp.test(email)) {
-      console.error('email is invalid');
-      return;
-    }
-
-    //opens popup
-    toggleSubmit();
-
     //invite the user via stytch
     try {
       const inviteResp = await inviteUser(email);
+      
+      if(inviteResp instanceof Error){
+        console.error(inviteResp)
+        return;
+      }
 
       //log the user out if the response is 200
       if (inviteResp.status == 401) {
@@ -88,9 +81,15 @@ const Profile = (props: Props) => {
       let id = addResp.id as number;
       users?.push({ id: id, name: name, email: email } as User);
       setUsers(users);
+
+      toggleOpenModal();
+    //opens popup
+      toggleSubmit();
+      
     } catch (error) {
       console.error(error);
     }
+
   };
 
   const deleteUser = async (id: number) => {
@@ -117,10 +116,12 @@ const Profile = (props: Props) => {
 
   return (
     <>
-      {token == '' ? (
-        <div></div>
+      {authenticated == false ? (
+        <div> {destroy()}</div>
       ) : (
+        
         <div id="container">
+        {console.log("authenticated")}
           <Notification open={submitOpen} toggle={toggleSubmit} />
           <Notification open={deleteOpen} toggle={toggleDelete} />
 
@@ -135,7 +136,7 @@ const Profile = (props: Props) => {
               submit={submitUser}
             />
           </StytchContainer>
-          <button className={styles.primaryButton} onClick={signOut}>
+          <button className={styles.primaryButton} onClick={logout}>
             Sign out
           </button>
         </div>
@@ -145,13 +146,22 @@ const Profile = (props: Props) => {
 };
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
-  var users: User[] = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
+  var usersResp = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
 
+  // var authenticated = true
+  // if (usersResp == null || usersResp.status != 200) {
+  //   console.error("user is not authenticated")
+  //   console.log(usersResp)
+  //   authenticated = false
+  // }
+
+  // console.log(authenticated)
   // Get the user's session based on the request
   return {
     props: {
       token: req.cookies[process.env.COOKIE_NAME as string] || '',
-      users: users,
+      users: usersResp,
+      // authenticated: authenticated,
     },
   };
 };

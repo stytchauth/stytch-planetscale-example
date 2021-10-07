@@ -5,8 +5,6 @@ import { BASE_URL } from '../lib/constants';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { LoginMethod } from '../lib/types';
-import LoginEntryPoint from '../components/LoginEntrypoint';
-import { BASE_URL } from '../lib/constants';
 
 const stytchProps = {
   config: {
@@ -51,7 +49,6 @@ type Props = {
 
 const App = (props: Props) => {
   const { token } = props;
-  const [loginMethod, setLoginMethod] = React.useState<LoginMethod | null>(null);
   const router = useRouter();
 
   useEffect(() => {
