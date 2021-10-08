@@ -48,7 +48,7 @@ const Profile = (props: Props) => {
   const destroy = async () => {
     //destroy session
     const logoutResp = await logout();
-
+    const logoutJSON = await logoutResp().json()
     //change url
     if (logoutResp.status == 200) router.push('/');
 
@@ -157,8 +157,10 @@ const Profile = (props: Props) => {
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   var usersResp = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
+  var usersJSON = await usersResp.json()
   var authenticated = true
- console.log(usersResp.status)
+
+
   if (usersResp.status == 401) {
     authenticated = false
   }
@@ -166,7 +168,7 @@ const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   return {
     props: {
       token: req.cookies[process.env.COOKIE_NAME as string] || '',
-      users: usersResp,
+      users: usersJSON,
       authenticated: authenticated,
     },
   };

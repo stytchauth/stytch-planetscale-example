@@ -8,10 +8,15 @@
 }
 
 .table{
-  height:400px;
+  height:300px;
   overflow:scroll;
   position: relative;
-  /* background-color: #10232E; */
+}
+
+
+.row{
+  height:15px;
+  /* width:100%; */
 }
 
 .container {

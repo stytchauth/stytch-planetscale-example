@@ -30,18 +30,16 @@ export async function addUser(name: string, email: string, password: string) {
   return data;
 }
 
-export const getUsers = async (token: string) : Promise<User[]>=> {
+export const getUsers = async (token: string) => {
   // we pass the token in because redirects do not immediately update the cookie
   //getUsers is the only functi being used with a redirect
   const resp = await fetch(`${BASE_URL}/api/users?token=${token}`, {
 method: 'GET',
   });
-  const data = await resp.json();
-  return data;
+  return resp;
 };
 
 export const logout = async () => {
   const resp = await fetch('/api/logout', { method: 'POST' });
-  const data = await resp.json();
-  return data;
+  return resp;
 };

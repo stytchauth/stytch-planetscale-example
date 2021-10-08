@@ -38,7 +38,7 @@ const UsersTable = (props: Props) => {
     <TableContainer >
     <Table className={styles.table} >
       <TableHead>
-        <TableRow>
+        <TableRow >
           <TableCell>
             {' '}
             <b>Name </b>
@@ -52,7 +52,7 @@ const UsersTable = (props: Props) => {
       <TableBody className={styles.userTable}>
         {
        users != null ? (users.map((user) => (
-          <TableRow key={user.id} id={user.id}>
+          <TableRow key={user.id} id={user.id} className={styles.row}>
             {' '}
             <TableCell> {user.name} </TableCell> <TableCell> {user.email} </TableCell>{' '}
             <TableCell>
@@ -62,7 +62,7 @@ const UsersTable = (props: Props) => {
             </TableCell>{' '}
           </TableRow>
         ))) :(<div/>)
-        }
+         }
 
         <TableRow>
         <TableFooter style={{
