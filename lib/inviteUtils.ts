@@ -21,6 +21,5 @@ export async function inviteUser(email: string) {
     }),
   });
 
-  const data = await resp.json();
-  return data;
+  return resp;
 }
