@@ -17,8 +17,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
   //validate session
   var isValidSession = await validSessionToken(token);
   if (!isValidSession) {
-    console.log("session is invalid")
-    res.status(401).json({ error: 'user unauthenticated', status: 401});
+    res.status(401).json({ error: 'user unauthenticated'});
     return;
   }
 
@@ -39,7 +38,7 @@ async function getUsers(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json(getRows);
   } catch (error) {
     console.error(error) 
-    res.status(500).json({ error: 'an error occurred', status: 500 });
+    res.status(500).json({ error: 'an error occurred'});
   }
   return;
 }
@@ -54,7 +53,7 @@ async function addUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
     res.status(201).json({ id: row.insertId, status:201 });
   } catch (error) {
     console.error(error) 
-    res.status(500).json({ error: 'an error occurred', status:500 });
+    res.status(500).json({ error: 'an error occurred'});
   }
   return;
 }

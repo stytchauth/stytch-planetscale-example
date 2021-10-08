@@ -4,8 +4,7 @@ import loadStytch from '../../lib/loadStytch';
 import { BASE_URL } from '../../lib/constants';
 
 type Data = {
-  error: string;
-  status: number;
+  error?: string;
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -14,7 +13,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   //validate user session
   const isValidSession = await validSessionToken(token);
   if (!isValidSession) {
-    res.status(401).json({ error: 'user unauthenticated', status: 401 });
+    res.status(401).json({ error: 'user unauthenticated' });
     return;
   }
 
@@ -28,8 +27,7 @@ async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
   const client = loadStytch();
   console.log('inviting user');
 
-  var body = JSON.parse(req.body);
-  var email = body['email'];
+  var email = req.body.email;
 
   // params are of type stytch.InviteByEmailRequest
   const params = {
@@ -44,7 +42,6 @@ async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json({status:200});    
     
   } catch (error) {
-    console.log('Failed invite user');
     console.error(error);
     res.status(400).json({ error });
   }
