@@ -25,7 +25,6 @@ const Profile = (props: Props) => {
     }
   };
 
-  console.log('inside profile');
   return (
     <>
       <div>

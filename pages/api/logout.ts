@@ -9,7 +9,7 @@ type Data = {
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method === 'POST') {
     try {
-      //  you can add logic to destroy other sessions or cookies as werll
+      //  you can add logic to destroy other sessions or cookies as well
       res
         .status(200)
         .setHeader('Set-Cookie', serialize(process.env.COOKIE_NAME as string, '', { path: '/', maxAge: -1 }))

@@ -16,7 +16,6 @@ export async function validSessionToken(token: string): Promise<boolean> {
 
     return true;
   } catch (error) {
-    console.log('Failed to validate session. Token = ', token);
     console.error(error);
     return false;
   }
