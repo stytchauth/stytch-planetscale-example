@@ -4,8 +4,7 @@ import loadStytch from '../../lib/loadStytch';
 import { BASE_URL } from '../../lib/constants';
 
 type Data = {
-  error: string;
-  status: number;
+  error?: string;
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -14,7 +13,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   //validate user session
   const isValidSession = await validSessionToken(token);
   if (!isValidSession) {
-    res.status(401).json({ error: 'user unauthenticated', status: 401 });
+    res.status(401).json({ error: 'user unauthenticated' });
     return;
   }
 
