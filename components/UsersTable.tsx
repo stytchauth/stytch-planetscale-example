@@ -36,7 +36,7 @@ const UsersTable = (props: Props) => {
 
   return (
     <TableContainer >
-    <Table className={styles.table} >
+    <Table stickyHeader className={styles.table} >
       <TableHead>
         <TableRow >
           <TableCell>
@@ -49,13 +49,13 @@ const UsersTable = (props: Props) => {
           <TableCell> </TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className={styles.userTable}>
+      <TableBody>
         {
        users != null ? (users.map((user) => (
           <TableRow key={user.id} id={user.id} className={styles.row}>
             {' '}
-            <TableCell> {user.name} </TableCell> <TableCell> {user.email} </TableCell>{' '}
-            <TableCell>
+            <TableCell className={styles.cell}> {user.name} </TableCell> <TableCell> {user.email} </TableCell>{' '}
+            <TableCell className={styles.cell}>
               <IconButton color="secondary" onClick={() => deleteUser(user.id)}>
                 <CloseIcon />
               </IconButton>{' '}

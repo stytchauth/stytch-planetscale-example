@@ -13,7 +13,7 @@ const StytchContainer = (props: Props) => {
   return (
     <div className={styles.container}>
       <div>{children}</div>
-      <div className="watermark">
+      <div className={styles.watermark}>
         <Image alt="Powered by Stytch" height={15} src={stytch} width={250} />
         <p className={styles.ampersand}> & </p>
         <Image className={styles.image} alt="Powered by Planetscale" src={planetscale} height={25} width={175} />

@@ -13,10 +13,12 @@
   position: relative;
 }
 
+.cell{
+  padding:8px !important;
+}
 
-.row{
-  height:15px;
-  /* width:100%; */
+.watermark{
+  margin-top: 15px;
 }
 
 .container {
@@ -28,11 +30,9 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  padding: 80px;
-  width: 600px;
-  /* height: 550px; */
+  padding: 60px;
+  width: 550px;
   max-height: 550px;
-  /* overflow: 'auto'; */
 }
 
 @media only screen and (max-width: 600px) {
@@ -50,12 +50,7 @@
   }
 }
 
-.userTable{
-  /* marginTop: theme.spacing.unit * 3, */
-  /* background-color: black; */
-  /* flex-grow: 1;
-  display:flex; */
-}
+
 
 
 .image{
