@@ -32,7 +32,7 @@ async function getUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json(getRows);
   } catch (error) {
     console.error(error)
-    res.status(500).json({ error: 'an error occurred' });
+    res.status(500).json({ error: 'an error occurred', status:500});
   }
   return;
 }
@@ -44,10 +44,10 @@ async function deleteUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse)
     var params = [req.query['uid']];
 
     const [row, _] = await conn.query(query, params);
-    res.status(200).json({ id: row.insertId });
+    res.status(200).json({ id: row.insertId, status:200 });
   } catch (error) {
     console.error(error)
-    res.status(500).json({ error: 'an error occurred' });
+    res.status(500).json({ error: 'an error occurred', status:500 });
   }
   return;
 }

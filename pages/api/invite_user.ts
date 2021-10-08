@@ -26,6 +26,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
 async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
   const client = loadStytch();
+  console.log('inviting user');
 
   var body = JSON.parse(req.body);
   var email = body['email'];
@@ -39,7 +40,8 @@ async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     await client.magicLinks.email.loginOrCreate(params);
-    res.status(200);    
+    console.log('invited user');
+    res.status(200).json({status:200});    
     
   } catch (error) {
     console.log('Failed invite user');

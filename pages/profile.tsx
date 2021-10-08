@@ -25,6 +25,14 @@ const Profile = (props: Props) => {
   const [deleteOpen, setDeleteOpen] = React.useState(false);
   const [_, setUsers] = React.useState(users);
 
+
+  useEffect(() => {
+    if (!authenticated) {
+      destroy()
+      router.replace('/');
+    }
+  });
+  
   function toggleOpenModal() {
     setOpen(!open);
   }
@@ -57,23 +65,28 @@ const Profile = (props: Props) => {
     //invite the user via stytch
     try {
       const inviteResp = await inviteUser(email);
+      console.log("Invite Resp", inviteResp)
       
       if(inviteResp instanceof Error){
+        console.log("instance of error")
+        console.log("error")
         console.error(inviteResp)
         return;
       }
 
       //log the user out if the response is 200
       if (inviteResp.status == 401) {
+        console.log("destroying session")
         destroy();
         return;
       }
 
       //add user to DB
       const addResp = await addUser(name, email, 'temp');
+      console.log("Add Resp", addResp)
 
-      if (addResp.status != 200) {
-        console.error(addResp.error);
+      if (addResp.status != 201) {
+        console.error(addResp);
         return;
       }
 
@@ -81,9 +94,10 @@ const Profile = (props: Props) => {
       let id = addResp.id as number;
       users?.push({ id: id, name: name, email: email } as User);
       setUsers(users);
+      console.log("set users")
 
+      //closes modal and opens popup
       toggleOpenModal();
-    //opens popup
       toggleSubmit();
       
     } catch (error) {
@@ -115,13 +129,9 @@ const Profile = (props: Props) => {
   };
 
   return (
-    <>
-      {authenticated == false ? (
-        <div> {destroy()}</div>
-      ) : (
-        
+    <>  
+    {authenticated  == false ? <div/> :
         <div id="container">
-        {console.log("authenticated")}
           <Notification open={submitOpen} toggle={toggleSubmit} />
           <Notification open={deleteOpen} toggle={toggleDelete} />
 
@@ -140,28 +150,24 @@ const Profile = (props: Props) => {
             Sign out
           </button>
         </div>
-      )}
+      }
     </>
-  );
+  ); 
 };
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   var usersResp = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
+  var authenticated = true
+ console.log(usersResp.status)
+  if (usersResp.status == 401) {
+    authenticated = false
+  }
 
-  // var authenticated = true
-  // if (usersResp == null || usersResp.status != 200) {
-  //   console.error("user is not authenticated")
-  //   console.log(usersResp)
-  //   authenticated = false
-  // }
-
-  // console.log(authenticated)
-  // Get the user's session based on the request
   return {
     props: {
       token: req.cookies[process.env.COOKIE_NAME as string] || '',
       users: usersResp,
-      // authenticated: authenticated,
+      authenticated: authenticated,
     },
   };
 };

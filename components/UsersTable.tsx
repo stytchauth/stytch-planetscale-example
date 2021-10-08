@@ -7,6 +7,8 @@ import {
   TableBody,
   TableHead,
   TableRow,
+  TableFooter,
+  TableContainer,
   InputLabel,
   TextField,
   DialogContent,
@@ -16,6 +18,7 @@ import {
 import { User } from '../pages/api/users/';
 import AddIcon from '@material-ui/icons/AddRounded';
 import Dialog from '@mui/material/Dialog';
+import styles from '../styles/Home.module.css';
 
 type Props = {
   users: User[];
@@ -32,7 +35,8 @@ const UsersTable = (props: Props) => {
   const { users, toggle, isOpen, submit, setName, setEmail, deleteUser } = props;
 
   return (
-    <Table>
+    <TableContainer >
+    <Table className={styles.table} >
       <TableHead>
         <TableRow>
           <TableCell>
@@ -45,7 +49,7 @@ const UsersTable = (props: Props) => {
           <TableCell> </TableCell>
         </TableRow>
       </TableHead>
-      <TableBody>
+      <TableBody className={styles.userTable}>
         {
        users != null ? (users.map((user) => (
           <TableRow key={user.id} id={user.id}>
@@ -61,9 +65,13 @@ const UsersTable = (props: Props) => {
         }
 
         <TableRow>
-          <Button startIcon={<AddIcon />} onClick={toggle} size="small">
+        <TableFooter style={{
+                position: "absolute",
+              }} > 
+              <Button className={styles.submitBtn} startIcon={<AddIcon />} onClick={toggle} size="small">
             Invite
           </Button>
+              </TableFooter>
           <Dialog open={isOpen} onClose={toggle}>
             <DialogTitle>{`Invite`}</DialogTitle>
             <DialogContent>
@@ -99,8 +107,12 @@ const UsersTable = (props: Props) => {
             </DialogContent>
           </Dialog>
         </TableRow>
+
       </TableBody>
+
     </Table>
+
+    </TableContainer>
   );
 };
 

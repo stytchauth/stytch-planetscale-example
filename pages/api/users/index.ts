@@ -44,7 +44,6 @@ async function getUsers(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
   return;
 }
 
-//, status:200}addUser create a new user
 async function addUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
   var user = JSON.parse(req.body);
   try {
@@ -52,10 +51,10 @@ async function addUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
     var params = Object.values(user);
 
     const [row, _] = await conn.query(query, params);
-    res.status(201).json({ id: row.insertId });
+    res.status(201).json({ id: row.insertId, status:201 });
   } catch (error) {
     console.error(error) 
-    res.status(500).json({ error: 'an error occurred' });
+    res.status(500).json({ error: 'an error occurred', status:500 });
   }
   return;
 }
