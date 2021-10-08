@@ -27,8 +27,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
   const client = loadStytch();
 
-  var body = JSON.parse(req.body);
-  var email = body['email'];
+  var email = req.body.email;
 
   // params are of type stytch.InviteByEmailRequest
   const params = {
@@ -42,7 +41,6 @@ async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
     res.status(200);    
     
   } catch (error) {
-    console.log('Failed invite user');
     console.error(error);
     res.status(400).json({ error });
   }

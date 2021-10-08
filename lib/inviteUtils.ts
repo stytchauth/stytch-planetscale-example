@@ -11,14 +11,13 @@ var regexp = new RegExp(
 export async function inviteUser(email: string) {
    //validate email
    if (!regexp.test(email)) {
-    console.error('email is invalid');
-    return new Error("email format is invalid");
+    throw new Error("email format is invalid");
   }
 
   const resp = await fetch(url, {
     method: 'POST',
     body: JSON.stringify({
-      email: email,
+      email,
     }),
   });
 
