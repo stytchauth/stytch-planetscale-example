@@ -5,7 +5,7 @@ import Notification from '../components/Notification';
 import UsersTable from '../components/UsersTable';
 import { User } from '../pages/api/users/';
 import { ServerSideProps } from '../lib/StytchSession';
-import { inviteUser } from '../lib/inviteUtils';
+import { inviteUser, isValidEmail } from '../lib/inviteUtils';
 import { getUsers, addUser, deleteUserById, logout } from '../lib/usersUtils';
 import { useRouter } from 'next/router';
 
@@ -18,12 +18,13 @@ type Props = {
 const Profile = (props: Props) => {
   const { users, authenticated } = props;
   const router = useRouter();
-  const [open, setOpen] = React.useState(false);
+  const [openInviteModal, setOpen] = React.useState(false);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [submitOpen, setSubmitOpen] = React.useState(false);
-  const [deleteOpen, setDeleteOpen] = React.useState(false);
-  const [_, setUsers] = React.useState(users);
+  const [openSubmitAlert, setSubmitAlert] = React.useState(false);
+  const [openDeleteAlert, setDeleteAlert] = React.useState(false);
+  const [_users, setUsers] = React.useState(users)
+  const [_authenticated, setAuthenticated] = React.useState(authenticated)
 
 
   useEffect(() => {
@@ -33,47 +34,47 @@ const Profile = (props: Props) => {
     }
   });
   
-  function toggleOpenModal() {
-    setOpen(!open);
+  function toggleInviteModal() {
+    setOpen(!openInviteModal);
   }
 
   function toggleSubmit() {
-    setSubmitOpen(!submitOpen);
+    setSubmitAlert(!openSubmitAlert);
   }
 
   function toggleDelete() {
-    setDeleteOpen(!deleteOpen);
+    setDeleteAlert(!openDeleteAlert);
   }
 
+  // removes any client-side user state
   const destroy = async () => {
     //destroy session
     const logoutResp = await logout();
-    const logoutJSON = await logoutResp().json()
+    setAuthenticated(false)
     //change url
     if (logoutResp.status == 200) router.push('/');
-
     return;
   };
 
   const submitUser = async () => {
     //if the form is empty, close the modal
     if (name == '' || email == '') {
-      toggleOpenModal();
+      toggleInviteModal();
       return;
     }
 
     //invite the user via stytch
     try {
-      const inviteResp = await inviteUser(email);
-      console.log("Invite Resp", inviteResp)
-      
-      if(inviteResp instanceof Error){
-        console.log("instance of error")
-        console.log("error")
-        console.error(inviteResp)
-        return;
+
+      if (!isValidEmail(email)) {
+        throw new Error("email format is invalid");
       }
 
+      //closes modal and opens popup
+      toggleInviteModal();
+      toggleSubmit();
+
+      const inviteResp = await inviteUser(email);      
       //log the user out if the response is 200
       if (inviteResp.status == 401) {
         console.log("destroying session")
@@ -83,8 +84,6 @@ const Profile = (props: Props) => {
 
       //add user to DB
       const addResp = await addUser(name, email, 'temp');
-      console.log("Add Resp", addResp)
-
       if (addResp.status != 201) {
         console.error(addResp);
         return;
@@ -94,14 +93,10 @@ const Profile = (props: Props) => {
       let id = addResp.id as number;
       users?.push({ id: id, name: name, email: email } as User);
       setUsers(users);
-      console.log("set users")
-
-      //closes modal and opens popup
-      toggleOpenModal();
-      toggleSubmit();
       
     } catch (error) {
       console.error(error);
+      return;
     }
 
   };
@@ -125,6 +120,7 @@ const Profile = (props: Props) => {
       toggleDelete();
     } catch (error) {
       console.error(error);
+      return;
     }
   };
 
@@ -132,8 +128,8 @@ const Profile = (props: Props) => {
     <>  
     {authenticated  == false ? <div/> :
         <div id="container">
-          <Notification open={submitOpen} toggle={toggleSubmit} />
-          <Notification open={deleteOpen} toggle={toggleDelete} />
+          <Notification open={openSubmitAlert} toggle={toggleSubmit} />
+          <Notification open={openDeleteAlert} toggle={toggleDelete} />
 
           <StytchContainer>
             <UsersTable
@@ -141,8 +137,8 @@ const Profile = (props: Props) => {
               setName={setName}
               setEmail={setEmail}
               deleteUser={deleteUser}
-              toggle={toggleOpenModal}
-              isOpen={open}
+              toggle={toggleInviteModal}
+              isOpen={openInviteModal}
               submit={submitUser}
             />
           </StytchContainer>

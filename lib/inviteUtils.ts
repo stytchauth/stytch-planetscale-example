@@ -23,3 +23,8 @@ export async function inviteUser(email: string) {
 
   return resp;
 }
+
+export function isValidEmail(email: string) : boolean{
+     //validate email
+     return regexp.test(email)      
+}

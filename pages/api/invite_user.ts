@@ -40,7 +40,6 @@ async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
     res.status(200);    
     
   } catch (error) {
-    console.error(error);
     res.status(400).json({ error });
   }
   return;

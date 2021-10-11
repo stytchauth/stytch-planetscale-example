@@ -29,7 +29,6 @@ async function authenticate(req: NextApiRequest, res: NextApiResponse) {
     res.redirect('/profile');
     return;
   } catch (error) {
-    console.error('Failed to login user', token);
     res.status(400).json({ error });
     return;
   }
