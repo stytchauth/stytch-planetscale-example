@@ -31,7 +31,6 @@ type Props = {
 };
 
 const UsersTable = (props: Props) => {
-  // const {users, delete, toggle,isOpen} = props
   const { users, toggle, isOpen, submit, setName, setEmail, deleteUser } = props;
 
   return (
@@ -49,6 +48,7 @@ const UsersTable = (props: Props) => {
           <TableCell> </TableCell>
         </TableRow>
       </TableHead>
+
       <TableBody>
         {
        users != null ? (users.map((user) => (

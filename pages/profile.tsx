@@ -16,13 +16,13 @@ type Props = {
 };
 
 const Profile = (props: Props) => {
-  const { users, authenticated } = props;
   const router = useRouter();
+  const { users, authenticated } = props;
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [submitOpen, setSubmitOpen] = React.useState(false);
-  const [deleteOpen, setDeleteOpen] = React.useState(false);
+  const [submitOpen, setSubmitOpen] = React.useState(false); //submit alert
+  const [deleteOpen, setDeleteOpen] = React.useState(false); //delete alert
   const [_, setUsers] = React.useState(users);
 
 
