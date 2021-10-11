@@ -7,18 +7,32 @@
   justify-content: center;
 }
 
+.table{
+  height:300px;
+  overflow:scroll;
+  position: relative;
+}
+
+.cell{
+  padding:8px !important;
+}
+
+.watermark{
+  margin-top: 15px;
+}
+
 .container {
   background-color: white;
   border: 1px solid #ebebeb;
   border-radius: 9px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
-  display: flex;
+  display: flex; 
   flex-direction: column;
   justify-content: space-between;
-  padding: 80px;
-  width: 600px;
-  height: 550px;
   text-align: center;
+  padding: 60px;
+  width: 550px;
+  max-height: 550px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -36,6 +50,19 @@
   }
 }
 
+.logo{
+  opacity: 60%;
+  padding:50px;
+  height:50px;
+  min-width: 10%;
+  max-width: 10%;
+  min-height: 10%;
+  max-height:10%;
+}
+
+.ampersand{
+  opacity: 60%;
+}
 
 .primaryButton {
   background-color: #19303D;
@@ -83,6 +110,7 @@
   background-color: #E5E8EB;
   color: #19303D;
   margin-bottom: 16px;
+  margin-top:100px;
 }
 
 /* SMS login styles */
