@@ -1,4 +1,3 @@
-import { User } from '../pages/api/users/';
 import { BASE_URL } from './constants';
 
 export async function getUserById(id: number) {
@@ -38,7 +37,7 @@ method: 'GET',
   return resp;
 };
 
-export const logout = async () => {
+export const signout = async () => {
   const resp = await fetch('/api/logout', { method: 'POST' });
   return resp;
 };
