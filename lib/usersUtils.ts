@@ -38,7 +38,7 @@ method: 'GET',
   return resp;
 };
 
-export const logout = async () => {
+export const signOut = async () => {
   const resp = await fetch('/api/logout', { method: 'POST' });
   return resp;
 };
