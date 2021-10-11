@@ -27,9 +27,9 @@ const stytchProps = {
     width: '321px',
   },
   publicToken: process.env.STYTCH_PUBLIC_TOKEN || '',
+  url: process.env.REACT_APP_STYTCH_JS_SDK_URL || 'https://js.stytch.com/stytch.js',
   callbacks: {
     onEvent: (data: any) => {
-      // TODO: check whether the user exists in your DB
       if (data.eventData.type === 'USER_EVENT_TYPE') {
         console.log({
           userId: data.eventData.userId,
@@ -43,18 +43,15 @@ const stytchProps = {
 };
 
 type Props = {
-  publicToken: string;
-  user: {
-    id: string;
-  };
+  token: string;
 };
 
 const App = (props: Props) => {
-  const { user } = props;
+  const { token } = props;
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
+    if (!token) {
       router.push('/profile');
     }
   });
@@ -63,10 +60,11 @@ const App = (props: Props) => {
     <div className={styles.root}>
       <div className={styles.container}>
         <Stytch
-          publicToken={process.env.STYTCH_PUBLIC_TOKEN || ''}
+          publicToken={stytchProps.publicToken}
           config={stytchProps.config}
           style={stytchProps.style}
           callbacks={stytchProps.callbacks}
+          _url={stytchProps.url}
         />
       </div>{' '}
     </div>
@@ -75,7 +73,9 @@ const App = (props: Props) => {
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   // Get the user's session based on the request
-  return { props: { token: req.cookies[process.env.COOKIE_NAME as string] || '' } };
+  return { props: { 
+    token: req.cookies[process.env.COOKIE_NAME as string] || '',
+    authenticated: false, } };
 };
 
 export const getServerSideProps = getServerSidePropsHandler;
