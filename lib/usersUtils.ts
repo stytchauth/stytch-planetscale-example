@@ -1,4 +1,3 @@
-import { User } from '../pages/api/users/';
 import { BASE_URL } from './constants';
 
 export async function getUserById(id: number) {
