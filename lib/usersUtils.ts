@@ -33,7 +33,7 @@ export const getUsers = async (token: string) => {
   // we pass the token in because redirects do not immediately update the cookie
   // getUsers is the only function being used after a redirect
   const resp = await fetch(`${BASE_URL}/api/users?token=${token}`, {
-method: 'GET',
+    method: 'GET',
   });
   return resp;
 };

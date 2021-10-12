@@ -34,83 +34,85 @@ const UsersTable = (props: Props) => {
   const { users, toggle, isOpen, submit, setName, setEmail, deleteUser } = props;
 
   return (
-    <TableContainer >
-    <Table stickyHeader className={styles.table} >
-      <TableHead>
-        <TableRow >
-          <TableCell>
-            {' '}
-            <b>Name </b>
-          </TableCell>
-          <TableCell>
-            <b> Email </b>{' '}
-          </TableCell>
-          <TableCell> </TableCell>
-        </TableRow>
-      </TableHead>
-
-      <TableBody>
-        {
-       users != null ? (users.map((user) => (
-          <TableRow key={user.id} id={user.id} className={styles.row}>
-            {' '}
-            <TableCell className={styles.cell}> {user.name} </TableCell> <TableCell> {user.email} </TableCell>{' '}
-            <TableCell className={styles.cell}>
-              <IconButton color="secondary" onClick={() => deleteUser(user.id)}>
-                <CloseIcon />
-              </IconButton>{' '}
-            </TableCell>{' '}
+    <TableContainer>
+      <Table stickyHeader className={styles.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              {' '}
+              <b>Name </b>
+            </TableCell>
+            <TableCell>
+              <b> Email </b>{' '}
+            </TableCell>
+            <TableCell> </TableCell>
           </TableRow>
-        ))) :(<div/>)
-         }
+        </TableHead>
 
-        <TableRow>
-        <TableFooter style={{
-                position: "absolute",
-              }} > 
+        <TableBody>
+          {users != null ? (
+            users.map((user) => (
+              <TableRow key={user.id} id={user.id} className={styles.row}>
+                {' '}
+                <TableCell className={styles.cell}> {user.name} </TableCell> <TableCell> {user.email} </TableCell>{' '}
+                <TableCell className={styles.cell}>
+                  <IconButton color="secondary" onClick={() => deleteUser(user.id)}>
+                    <CloseIcon />
+                  </IconButton>{' '}
+                </TableCell>{' '}
+              </TableRow>
+            ))
+          ) : (
+            <div />
+          )}
+
+          <TableRow>
+            <TableFooter
+              style={{
+                position: 'absolute',
+              }}
+            >
               <Button className={styles.submitBtn} startIcon={<AddIcon />} onClick={toggle} size="small">
-            Invite
-          </Button>
-              </TableFooter>
-          <Dialog open={isOpen} onClose={toggle}>
-            <DialogTitle>{`Invite`}</DialogTitle>
-            <DialogContent>
-              <InputLabel> Name</InputLabel>
-              <TextField
-                autoFocus
-                margin="dense"
-                placeholder="Ada Lovelace"
-                variant="standard"
-                size="small"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <InputLabel>Email</InputLabel>
-              <TextField
-                autoFocus
-                margin="dense"
-                placeholder="ada@lovelace.com"
-                variant="standard"
-                size="small"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Button
-                onClick={submit}
-                style={{
-                  backgroundColor: '#0D4052',
-                  color: 'white',
-                }}
-                variant="contained"
-                size="small"
-              >
-                Confirm
+                Invite
               </Button>
-            </DialogContent>
-          </Dialog>
-        </TableRow>
-      </TableBody>
-
-    </Table>
-
+            </TableFooter>
+            <Dialog open={isOpen} onClose={toggle}>
+              <DialogTitle>{`Invite`}</DialogTitle>
+              <DialogContent>
+                <InputLabel> Name</InputLabel>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  placeholder="Ada Lovelace"
+                  variant="standard"
+                  size="small"
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <InputLabel>Email</InputLabel>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  placeholder="ada@lovelace.com"
+                  variant="standard"
+                  size="small"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Button
+                  onClick={submit}
+                  style={{
+                    backgroundColor: '#0D4052',
+                    color: 'white',
+                  }}
+                  variant="contained"
+                  size="small"
+                >
+                  Confirm
+                </Button>
+              </DialogContent>
+            </Dialog>
+          </TableRow>
+        </TableBody>
+      </Table>
     </TableContainer>
   );
 };

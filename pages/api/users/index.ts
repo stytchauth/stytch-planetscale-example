@@ -17,12 +17,12 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
   //validate session
   var isValidSession = await validSessionToken(token);
   if (!isValidSession) {
-    res.status(401).json({ error: 'user unauthenticated'});
+    res.status(401).json({ error: 'user unauthenticated' });
     return;
   }
 
   if (req.method == 'GET') {
-     getUsers(conn, req, res);
+    getUsers(conn, req, res);
   } else if (req.method == 'POST') {
     addUser(conn, req, res);
   }
@@ -37,8 +37,8 @@ async function getUsers(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
     const [getRows, _] = await conn.query(query, '');
     res.status(200).json(getRows);
   } catch (error) {
-    console.error(error) 
-    res.status(500).json({ error: 'an error occurred'});
+    console.error(error);
+    res.status(500).json({ error: 'an error occurred' });
   }
   return;
 }
@@ -53,8 +53,8 @@ async function addUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
     const [row, _] = await conn.query(query, params);
     res.status(201).json({ id: row.insertId });
   } catch (error) {
-    console.error(error) 
-    res.status(500).json({ error: 'an error occurred'});
+    console.error(error);
+    res.status(500).json({ error: 'an error occurred' });
   }
   return;
 }

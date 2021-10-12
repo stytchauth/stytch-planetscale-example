@@ -23,17 +23,16 @@ const Profile = (props: Props) => {
   const [email, setEmail] = React.useState('');
   const [openSubmitAlert, setSubmitAlert] = React.useState(false);
   const [openDeleteAlert, setDeleteAlert] = React.useState(false);
-  const [_users, setUsers] = React.useState(users)
-  const [_authenticated, setAuthenticated] = React.useState(authenticated)
-
+  const [_users, setUsers] = React.useState(users);
+  const [_authenticated, setAuthenticated] = React.useState(authenticated);
 
   useEffect(() => {
     if (!authenticated) {
-      destroy()
+      destroy();
       router.replace('/');
     }
   });
-  
+
   function toggleInviteModal() {
     setOpen(!openInviteModal);
   }
@@ -50,7 +49,7 @@ const Profile = (props: Props) => {
   const destroy = async () => {
     //destroy session
     const logoutResp = await logout();
-    setAuthenticated(false)
+    setAuthenticated(false);
     //change url
     if (logoutResp.status == 200) router.push('/');
     return;
@@ -65,19 +64,18 @@ const Profile = (props: Props) => {
 
     //invite the user via stytch
     try {
-
       if (!isValidEmail(email)) {
-        throw new Error("email format is invalid");
+        throw new Error('email format is invalid');
       }
 
       //closes modal and opens popup
       toggleInviteModal();
       toggleSubmit();
 
-      const inviteResp = await inviteUser(email);      
+      const inviteResp = await inviteUser(email);
       //log the user out if the response is 200
       if (inviteResp.status == 401) {
-        console.log("destroying session")
+        console.log('destroying session');
         destroy();
         return;
       }
@@ -93,12 +91,10 @@ const Profile = (props: Props) => {
       let id = addResp.id as number;
       users?.push({ id: id, name: name, email: email } as User);
       setUsers(users);
-      
     } catch (error) {
       console.error(error);
       return;
     }
-
   };
 
   const deleteUser = async (id: number) => {
@@ -125,8 +121,10 @@ const Profile = (props: Props) => {
   };
 
   return (
-    <>  
-    {authenticated  == false ? <div/> :
+    <>
+      {authenticated == false ? (
+        <div />
+      ) : (
         <div id="container">
           <Notification open={openSubmitAlert} toggle={toggleSubmit} />
           <Notification open={openDeleteAlert} toggle={toggleDelete} />
@@ -146,19 +144,18 @@ const Profile = (props: Props) => {
             Sign out
           </button>
         </div>
-      }
+      )}
     </>
-  ); 
+  );
 };
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   var usersResp = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
-  var usersJSON = await usersResp.json()
-  var authenticated = true
-
+  var usersJSON = await usersResp.json();
+  var authenticated = true;
 
   if (usersResp.status == 401) {
-    authenticated = false
+    authenticated = false;
   }
 
   return {

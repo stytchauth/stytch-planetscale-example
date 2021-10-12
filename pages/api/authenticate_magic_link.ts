@@ -8,9 +8,9 @@ type Data = {
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method === 'GET') {
-    authenticate(req,res)
+    authenticate(req, res);
     return;
-  } 
+  }
 }
 
 async function authenticate(req: NextApiRequest, res: NextApiResponse) {

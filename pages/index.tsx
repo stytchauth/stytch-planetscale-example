@@ -73,9 +73,12 @@ const App = (props: Props) => {
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   // Get the user's session based on the request
-  return { props: { 
-    token: req.cookies[process.env.COOKIE_NAME as string] || '',
-    authenticated: false, } };
+  return {
+    props: {
+      token: req.cookies[process.env.COOKIE_NAME as string] || '',
+      authenticated: false,
+    },
+  };
 };
 
 export const getServerSideProps = getServerSidePropsHandler;
