@@ -8,7 +8,7 @@ type Data = {
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  var token = (req.query['token'] || req.cookies[process.env.COOKIE_NAME as string]) as string;
+  var token = (req.query['token'] || req.cookies[process.env.NEXT_PUBLIC_COOKIE_NAME as string]) as string;
 
   //validate user session
   const isValidSession = await validSessionToken(token);
