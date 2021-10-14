@@ -66,7 +66,7 @@ const App = (props: Props) => {
           callbacks={stytchProps.callbacks}
           _url={stytchProps.url}
         />
-      </div>{' '}
+      </div>
     </div>
   );
 };
@@ -76,7 +76,6 @@ const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   return {
     props: {
       token: req.cookies[process.env.COOKIE_NAME as string] || '',
-      authenticated: false,
     },
   };
 };

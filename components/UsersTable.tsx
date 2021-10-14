@@ -39,11 +39,10 @@ const UsersTable = (props: Props) => {
         <TableHead>
           <TableRow>
             <TableCell>
-              {' '}
               <b>Name </b>
             </TableCell>
             <TableCell>
-              <b> Email </b>{' '}
+              <b> Email </b>
             </TableCell>
             <TableCell> </TableCell>
           </TableRow>
@@ -53,13 +52,13 @@ const UsersTable = (props: Props) => {
           {users != null ? (
             users.map((user) => (
               <TableRow key={user.id} id={user.id} className={styles.row}>
-                {' '}
-                <TableCell className={styles.cell}> {user.name} </TableCell> <TableCell> {user.email} </TableCell>{' '}
+                <TableCell className={styles.cell}> {user.name} </TableCell>
+                <TableCell> {user.email} </TableCell>
                 <TableCell className={styles.cell}>
                   <IconButton color="secondary" onClick={() => deleteUser(user.id)}>
                     <CloseIcon />
-                  </IconButton>{' '}
-                </TableCell>{' '}
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))
           ) : (
