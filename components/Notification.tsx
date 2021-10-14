@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Notification = (props: Props) => {
-  var { open, toggle } = props;
+  const { open, toggle } = props;
 
   return (
     <Collapse in={open}>

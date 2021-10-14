@@ -37,7 +37,7 @@ const Profile = (props: Props) => {
     setOpen(!openInviteModal);
   }
 
-  function toggleSubmit() {
+  function toggleSubmitAlert() {
     setSubmitAlert(!openSubmitAlert);
   }
 
