@@ -20,9 +20,9 @@ export async function addUser(name: string, email: string, password: string) {
   const resp = await fetch(`${BASE_URL}/api/users`, {
     method: 'POST',
     body: JSON.stringify({
-      name: name,
-      email: email,
-      password: password,
+      name,
+      email,
+      password,
     }),
   });
   const data = await resp.json();

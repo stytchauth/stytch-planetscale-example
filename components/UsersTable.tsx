@@ -76,9 +76,9 @@ const UsersTable = (props: Props) => {
               </Button>
             </TableFooter>
             <Dialog open={isOpen} onClose={toggle}>
-              <DialogTitle>{`Invite`}</DialogTitle>
+              <DialogTitle>Invite</DialogTitle>
               <DialogContent>
-                <InputLabel> Name</InputLabel>
+                <InputLabel>Name</InputLabel>
                 <TextField
                   autoFocus
                   margin="dense"
