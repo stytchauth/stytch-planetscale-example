@@ -14,9 +14,9 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  if (req.method == 'GET') {
+  if (req.method === 'GET') {
     getUser(conn, req, res);
-  } else if (req.method == 'DELETE') {
+  } else if (req.method === 'DELETE') {
     deleteUser(conn, req, res);
   }
   return;

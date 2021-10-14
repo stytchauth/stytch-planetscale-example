@@ -23,8 +23,8 @@ const Profile = (props: Props) => {
   const [email, setEmail] = React.useState('');
   const [openSubmitAlert, setSubmitAlert] = React.useState(false);
   const [openDeleteAlert, setDeleteAlert] = React.useState(false);
-  const [_users, setUsers] = React.useState(users);
-  const [_authenticated, setAuthenticated] = React.useState(authenticated);
+  const [usersState, setUsers] = React.useState(users);
+  const [auth, setAuthenticated] = React.useState(authenticated);
 
   useEffect(() => {
     if (!authenticated) {
@@ -51,13 +51,13 @@ const Profile = (props: Props) => {
     const logoutResp = await logout();
     setAuthenticated(false);
     //change url
-    if (logoutResp.status == 200) router.push('/');
+    if (logoutResp.status === 200) router.push('/');
     return;
   };
 
   const submitUser = async () => {
     //if the form is empty, close the modal
-    if (name == '' || email == '') {
+    if (name === '' || email === '') {
       toggleInviteModal();
       return;
     }
@@ -70,11 +70,11 @@ const Profile = (props: Props) => {
 
       //closes modal and opens popup
       toggleInviteModal();
-      toggleSubmit();
+      toggleSubmitAlert();
 
       const inviteResp = await inviteUser(email);
       //log the user out if the response is 200
-      if (inviteResp.status == 401) {
+      if (inviteResp.status === 401) {
         console.log('destroying session');
         destroy();
         return;
@@ -101,14 +101,14 @@ const Profile = (props: Props) => {
     try {
       const deleteUserResp = await deleteUserById(id);
 
-      if (deleteUserResp.status == 401) {
+      if (deleteUserResp.status === 401) {
         destroy();
         return;
       }
 
       //find and delete user
       users?.forEach((element, index) => {
-        if (element.id == id) users.splice(index, 1);
+        if (element.id === id) users.splice(index, 1);
       });
 
       //update UI
@@ -126,7 +126,7 @@ const Profile = (props: Props) => {
         <div />
       ) : (
         <div id="container">
-          <Notification open={openSubmitAlert} toggle={toggleSubmit} />
+          <Notification open={openSubmitAlert} toggle={toggleSubmitAlert} />
           <Notification open={openDeleteAlert} toggle={toggleDelete} />
 
           <StytchContainer>
@@ -154,7 +154,7 @@ const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   var usersJSON = await usersResp.json();
   var authenticated = true;
 
-  if (usersResp.status == 401) {
+  if (usersResp.status === 401) {
     authenticated = false;
   }
 

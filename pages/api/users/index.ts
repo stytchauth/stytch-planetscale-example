@@ -21,9 +21,9 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  if (req.method == 'GET') {
+  if (req.method === 'GET') {
     getUsers(conn, req, res);
-  } else if (req.method == 'POST') {
+  } else if (req.method === 'POST') {
     addUser(conn, req, res);
   }
   return;
