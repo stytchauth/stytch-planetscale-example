@@ -13,7 +13,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
       res
         .status(200)
         .setHeader('Set-Cookie', [
-          serialize(process.env.NEXT_PUBLIC_COOKIE_NAME as string, '', { path: '/', maxAge: -1 }),
+          serialize(process.env.COOKIE_NAME as string, '', { path: '/', maxAge: -1 }),
           serialize(STYTCH_SESSION_NAME, '', { path: '/', maxAge: -1 }),
         ]);
     } catch (error) {

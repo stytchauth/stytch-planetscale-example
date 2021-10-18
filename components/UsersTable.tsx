@@ -19,6 +19,7 @@ import { User } from '../pages/api/users/';
 import AddIcon from '@material-ui/icons/AddRounded';
 import Dialog from '@mui/material/Dialog';
 import styles from '../styles/Home.module.css';
+import InviteForm from './InviteForm';
 
 type Props = {
   users: User[];
@@ -78,35 +79,7 @@ const UsersTable = (props: Props) => {
             <Dialog open={isOpen} onClose={toggle}>
               <DialogTitle>Invite</DialogTitle>
               <DialogContent>
-                <InputLabel>Name</InputLabel>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  placeholder="Ada Lovelace"
-                  variant="standard"
-                  size="small"
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <InputLabel>Email</InputLabel>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  placeholder="ada@lovelace.com"
-                  variant="standard"
-                  size="small"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <Button
-                  onClick={submit}
-                  style={{
-                    backgroundColor: '#0D4052',
-                    color: 'white',
-                  }}
-                  variant="contained"
-                  size="small"
-                >
-                  Confirm
-                </Button>
+                <InviteForm setName={setName} setEmail={setEmail} submit={submit} />
               </DialogContent>
             </Dialog>
           </TableRow>

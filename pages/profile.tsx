@@ -59,7 +59,7 @@ const Profile = (props: Props) => {
     //if the form is empty, close the modal
     if (name === '' || email === '') {
       toggleInviteModal();
-      return;
+      throw new Error('one or more input field is empty');
     }
 
     //invite the user via stytch
@@ -150,7 +150,7 @@ const Profile = (props: Props) => {
 };
 
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
-  var usersResp = await getUsers(req.cookies[process.env.NEXT_PUBLIC_COOKIE_NAME as string]);
+  var usersResp = await getUsers(req.cookies[process.env.COOKIE_NAME as string]);
   var usersJSON = await usersResp.json();
   var authenticated = true;
 
@@ -160,7 +160,7 @@ const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
 
   return {
     props: {
-      token: req.cookies[process.env.NEXT_PUBLIC_COOKIE_NAME as string] || '',
+      token: req.cookies[process.env.COOKIE_NAME as string] || '',
       users: usersJSON,
       authenticated: authenticated,
     },

@@ -5,7 +5,7 @@ import { BASE_URL } from '../../../../lib/constants';
 
 const conn = new PSDB('main');
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
-  var token = (req.query['token'] || req.cookies[process.env.NEXT_PUBLIC_COOKIE_NAME as string]) as string;
+  var token = (req.query['token'] || req.cookies[process.env.COOKIE_NAME as string]) as string;
 
   //validate session
   var isValidSession = await validSessionToken(token);

@@ -26,7 +26,7 @@ const stytchProps = {
     },
     width: '321px',
   },
-  publicToken: process.env.STYTCH_PUBLIC_TOKEN || '',
+  publicToken: process.env.NEXT_PUBLIC_STYTCH_PUBLIC_TOKEN || '',
   url: process.env.NEXT_PUBLIC_STYTCH_JS_SDK_URL || 'https://js.stytch.com/stytch.js',
   callbacks: {
     onEvent: (data: any) => {
@@ -75,7 +75,7 @@ const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   // Get the user's session based on the request
   return {
     props: {
-      token: req.cookies[process.env.NEXT_PUBLIC_COOKIE_NAME as string] || '',
+      token: req.cookies[process.env.COOKIE_NAME as string] || '',
     },
   };
 };
