@@ -60,12 +60,14 @@ const Profile = (props: Props) => {
     if (!name || !email) {
       toggleInviteModal();
       console.error('one or more input field is empty');
+      return
     }
 
     //invite the user via stytch
     try {
       if (!isValidEmail(email)) {
-        throw new Error('email format is invalid');
+        console.error('email format is invalid');
+        return
       }
 
       //closes modal and opens popup
