@@ -51,7 +51,7 @@ const App = (props: Props) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (token !== '') {
+    if (token ) {
       router.push('/profile');
     }
   });

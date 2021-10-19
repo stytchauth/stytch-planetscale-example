@@ -57,9 +57,9 @@ const Profile = (props: Props) => {
 
   const submitUser = async () => {
     //if the form is empty, close the modal
-    if (name === '' || email === '') {
+    if (!name || !email) {
       toggleInviteModal();
-      throw new Error('one or more input field is empty');
+      console.error('one or more input field is empty');
     }
 
     //invite the user via stytch
@@ -82,7 +82,7 @@ const Profile = (props: Props) => {
 
       //add user to DB
       const addResp = await addUser(name, email, 'temp');
-      if (addResp.status != 201) {
+      if (addResp.status !== 201) {
         console.error(addResp);
         return;
       }
