@@ -14,9 +14,9 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  if (req.method == 'GET') {
+  if (req.method === 'GET') {
     getUser(conn, req, res);
-  } else if (req.method == 'DELETE') {
+  } else if (req.method === 'DELETE') {
     deleteUser(conn, req, res);
   }
   return;
@@ -31,8 +31,8 @@ async function getUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse) {
     const [getRows, _] = await conn.query(query, params);
     res.status(200).json(getRows);
   } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: 'an error occurred'});
+    console.error(error);
+    res.status(500).json({ error: 'an error occurred' });
   }
   return;
 }
@@ -44,9 +44,9 @@ async function deleteUser(conn: PSDB, req: NextApiRequest, res: NextApiResponse)
     var params = [req.query['uid']];
 
     const [row, _] = await conn.query(query, params);
-    res.status(200).json({ id: row.insertId, status:200 });
+    res.status(200).json({ id: row.insertId, status: 200 });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(500).json({ error: 'an error occurred' });
   }
   return;

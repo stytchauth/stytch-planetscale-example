@@ -37,10 +37,8 @@ async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     await client.magicLinks.email.loginOrCreate(params);
-    res.status(200);    
-    
+    res.status(200);
   } catch (error) {
-    console.error(error);
     res.status(400).json({ error });
   }
   return;

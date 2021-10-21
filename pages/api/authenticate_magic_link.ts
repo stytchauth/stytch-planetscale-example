@@ -8,9 +8,9 @@ type Data = {
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method === 'GET') {
-    authenticate(req,res)
+    authenticate(req, res);
     return;
-  } 
+  }
 }
 
 async function authenticate(req: NextApiRequest, res: NextApiResponse) {
@@ -29,7 +29,6 @@ async function authenticate(req: NextApiRequest, res: NextApiResponse) {
     res.redirect('/profile');
     return;
   } catch (error) {
-    console.error('Failed to login user', token);
     res.status(400).json({ error });
     return;
   }
