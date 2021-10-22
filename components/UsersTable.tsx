@@ -22,7 +22,7 @@ import styles from '../styles/Home.module.css';
 import InviteForm from './InviteForm';
 
 type Props = {
-  users: User[];
+  users: User[] | undefined;
   deleteUser: (id: number) => void;
   toggle: () => void;
   isOpen: boolean;
@@ -69,7 +69,7 @@ const UsersTable = (props: Props) => {
           <TableRow>
             <TableFooter
               style={{
-                position: 'absolute',
+                position: 'relative',
               }}
             >
               <Button className={styles.submitBtn} startIcon={<AddIcon />} onClick={toggle} size="small">

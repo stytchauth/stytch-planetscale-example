@@ -51,7 +51,7 @@ pscale database create <database-name>
 
 ```bash
 PLANETSCALE_TOKEN # The service token that you created, starts with pscale_tkn
-PLANETSCALE_TOKEN_ID # The id for the token, should look like ihk9lqudel8z
+PLANETSCALE_TOKEN_NAME # The id for the token, should look like ihk9lqudel8z
 PLANETSCALE_ORG # This is your Planetscale organization name, i.e. the name you chose when you created your account
 PLANETSCALE_DB # The name of your database, i.e. what you substituted above for <database_name>
 ```

@@ -8,7 +8,7 @@
 }
 
 .table{
-  height: 300px;
+  height: 100%;
   overflow: scroll;
   position: relative;
 }
@@ -31,8 +31,8 @@
   justify-content: space-between;
   text-align: center;
   padding: 60px;
-  width: 550px;
-  max-height: 550px;
+  width: 750px;
+  height: 750px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -70,9 +70,8 @@
   background-color: #19303D;
   position: relative;
   margin-top: 50px;
-  width: 50%;
+  width: 100%;
   top: 50%;
-  left: 20%;
 }
 
 .primaryButton:disabled {
