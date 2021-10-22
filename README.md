@@ -1,19 +1,18 @@
 # Stytch + Planetscale Example App
 
+<img src="./public/stytch-planetscale.png" alt="stytch" width="100%" align="center"/>
+
+
 This is a [Stytch](https://stytch.com) + [Planetscale](https://planetscale.com/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 This example app was created to demonstrate a lightweight fullstack user administration app using Planetscale's serverless MYSQL database and Stytch's authentication + session management APIs.
 
 Stytch
 ---
-<img src="./public/stytch.jpeg" alt="stytch" width="400"/>
-
 > Onboard, authenticate, and engage your users with Stytch’s APIs. Improve security and user experience with flexible, passwordless authentication solutions.
 
 Planetscale
 ---
-<img src="./public/planetscale.jpeg" alt="planetscale" width="400"/>
-
 > PlanetScale is the only serverless database platform you can start in seconds and scale indefinitely.
 
 
