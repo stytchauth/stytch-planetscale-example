@@ -1,5 +1,4 @@
 import { BASE_URL } from './constants';
-import type { NextApiResponse } from 'next';
 
 const url = `${BASE_URL}/api/invite_user`;
 

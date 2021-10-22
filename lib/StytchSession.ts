@@ -9,7 +9,7 @@ export async function validSessionToken(token: string): Promise<boolean> {
   try {
     const sessionAuthResp = await client.sessions.authenticate({ session_token: token });
 
-    if (sessionAuthResp.status_code != BigInt(200)) {
+    if (sessionAuthResp.status_code != 200) {
       console.error('Failed to validate session');
       return false;
     }
