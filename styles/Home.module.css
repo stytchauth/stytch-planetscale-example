@@ -8,17 +8,12 @@
 }
 
 .table{
-  height: 100%;
-  overflow: scroll;
   position: relative;
+  height: 250px;
 }
 
 .cell{
-  padding: 8px !important;
-}
-
-.watermark{
-  margin-top: 15px;
+  padding: 4px !important;
 }
 
 .container {
@@ -32,7 +27,12 @@
   text-align: center;
   padding: 60px;
   width: 750px;
-  height: 750px;
+  height: 500px;
+}
+
+.inviteForm {
+  width: 375px;
+  height: 250px;
 }
 
 @media only screen and (max-width: 600px) {
