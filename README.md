@@ -1,6 +1,6 @@
 # Stytch + Planetscale Example App
 
-<img src="./public/stytch-planetscale.png" alt="stytch" width="100%" align="center"/>
+<img src="./public/stytch-planetscale.png" alt="stytch" width="50%" align="center"/>
 
 
 This is a [Stytch](https://stytch.com) + [Planetscale](https://planetscale.com/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
