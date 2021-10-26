@@ -3,7 +3,8 @@ import loadStytch from '../../lib/loadStytch';
 import { serialize } from 'cookie';
 
 type Data = {
-  error: string;
+  error?: string;
+  message?:string;
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -25,7 +26,7 @@ async function authenticate(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader(
       'Set-Cookie',
       serialize(process.env.COOKIE_NAME as string, resp.session_token as string, { path: '/' }),
-    );
+    ).json({"message":"authenticated"});
     res.redirect('/profile');
     return;
   } catch (error) {

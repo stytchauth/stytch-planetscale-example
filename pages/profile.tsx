@@ -142,7 +142,7 @@ const Profile = (props: Props) => {
               submit={submitUser}
             />
           </StytchContainer>
-          <button className={styles.primaryButton} onClick={logout}>
+          <button className={styles.primaryButton} onClick={destroy}>
             Sign out
           </button>
         </div>
