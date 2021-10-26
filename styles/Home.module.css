@@ -27,12 +27,16 @@
   text-align: center;
   padding: 60px;
   width: 750px;
-  height: 500px;
+  height: 450px;
 }
 
 .inviteForm {
   width: 375px;
   height: 250px;
+}
+
+.watermark {
+  margin-top: 50px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -69,7 +73,7 @@
 .primaryButton {
   background-color: #19303D;
   position: relative;
-  margin-top: 50px;
+  margin-top: 20px;
   width: 100%;
   top: 50%;
 }
