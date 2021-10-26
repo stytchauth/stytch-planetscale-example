@@ -35,6 +35,7 @@ const InviteForm = (props: Props) => {
         style={{
           backgroundColor: '#0D4052',
           color: 'white',
+          top: '50px',
         }}
         variant="contained"
         size="small"

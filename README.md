@@ -1,11 +1,13 @@
 # Stytch + Planetscale Example App
 
-<img src="./public/stytch-planetscale.png" alt="stytch" width="100%" align="center"/>
+<p align="center"><img src="./public/stytch-planetscale.png" alt="stytch" width="50%"/></p>
 
 
 This is a [Stytch](https://stytch.com) + [Planetscale](https://planetscale.com/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 This example app was created to demonstrate a lightweight fullstack user administration app using Planetscale's serverless MYSQL database and Stytch's authentication + session management APIs.
+
+If you run into any problems or need some help while working on your Stytch + Planetscale integraiton, reach out to us at support@stytch.com or ask in our [community Slack](https://join.slack.com/t/stytch/shared_invite/zt-nil4wo92-jApJ9Cl32cJbEd9esKkvyg)!
 
 Stytch
 ---
@@ -17,10 +19,9 @@ Planetscale
 
 
 # Getting Started
----
 ## Setting up Stytch
 
-After signing up for Stytch, you'll need your Project's `porject_id`, `secret`, and `public_token`. You can find these in the [API keys tab](https://stytch.com/dashboard/api-keys).
+After signing up for Stytch, you'll need your Project's `project_id`, `secret`, and `public_token`. You can find these in the [API keys tab](https://stytch.com/dashboard/api-keys).
 
 Once you've gathered these values, add them to a new .env.local file.
 Example:
