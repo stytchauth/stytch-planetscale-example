@@ -19,7 +19,7 @@ async function authenticate(req: NextApiRequest, res: NextApiResponse) {
   const { token } = req.query;
 
   try {
-    //authenticate request and create 1 hour session
+    //authenticate request and create 7 day session
     const resp = await client.magicLinks.authenticate(token as string, { session_duration_minutes: 10080 });
 
     //send user to profile with cookies in response
