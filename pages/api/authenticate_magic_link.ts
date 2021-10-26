@@ -26,7 +26,7 @@ async function authenticate(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader(
       'Set-Cookie',
       serialize(process.env.COOKIE_NAME as string, resp.session_token as string, { path: '/' }),
-    ).json({"message":"authenticated"});
+    );
     res.redirect('/profile');
     return;
   } catch (error) {
