@@ -20,7 +20,7 @@ async function authenticate(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     //authenticate request and create 1 hour session
-    const resp = await client.magicLinks.authenticate(token as string, { session_duration_minutes: 60 });
+    const resp = await client.magicLinks.authenticate(token as string, { session_duration_minutes: 10080 });
 
     //send user to profile with cookies in response
     res.setHeader(
