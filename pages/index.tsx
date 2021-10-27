@@ -19,7 +19,7 @@ const stytchProps = {
   style: {
     fontFamily: '"Helvetica New", Helvetica, sans-serif',
     button: {
-      backgroundColor: '#0577CA',
+      backgroundColor: '#19303D',
     },
     input: {
       textColor: '#090909',

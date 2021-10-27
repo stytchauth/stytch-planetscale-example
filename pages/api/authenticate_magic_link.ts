@@ -3,7 +3,8 @@ import loadStytch from '../../lib/loadStytch';
 import { serialize } from 'cookie';
 
 type Data = {
-  error: string;
+  error?: string;
+  message?:string;
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -18,8 +19,8 @@ async function authenticate(req: NextApiRequest, res: NextApiResponse) {
   const { token } = req.query;
 
   try {
-    //authenticate request and create 1 hour session
-    const resp = await client.magicLinks.authenticate(token as string, { session_duration_minutes: 60 });
+    //authenticate request and create 7 day session
+    const resp = await client.magicLinks.authenticate(token as string, { session_duration_minutes: 10080 });
 
     //send user to profile with cookies in response
     res.setHeader(

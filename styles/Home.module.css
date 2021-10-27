@@ -8,17 +8,12 @@
 }
 
 .table{
-  height: 300px;
-  overflow: scroll;
   position: relative;
+  height: 250px;
 }
 
 .cell{
-  padding: 8px !important;
-}
-
-.watermark{
-  margin-top: 15px;
+  padding: 4px !important;
 }
 
 .container {
@@ -31,8 +26,17 @@
   justify-content: space-between;
   text-align: center;
   padding: 60px;
-  width: 550px;
-  max-height: 550px;
+  width: 750px;
+  height: 450px;
+}
+
+.inviteForm {
+  width: 375px;
+  height: 250px;
+}
+
+.watermark {
+  margin-top: 50px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -69,10 +73,9 @@
 .primaryButton {
   background-color: #19303D;
   position: relative;
-  margin-top: 50px;
-  width: 50%;
+  margin-top: 20px;
+  width: 100%;
   top: 50%;
-  left: 20%;
 }
 
 .primaryButton:disabled {
