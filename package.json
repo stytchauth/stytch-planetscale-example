@@ -22,7 +22,7 @@
     "@material-ui/utils": "^4.11.2",
     "@mui/icons-material": "^5.0.1",
     "@mui/material": "^5.0.2",
-    "@stytch/stytch-react": "^1.1.6",
+    "@stytch/stytch-react": "^3.0.1",
     "cookie": "^0.4.1",
     "cookies": "^0.8.0",
     "material-icons": "^1.6.0",
