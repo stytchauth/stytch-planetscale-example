@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pscale connect stytch-planetscale-nextjs main --execute 'next dev'",
+    "dev": "pscale connect your-db-name main --execute 'next dev'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
