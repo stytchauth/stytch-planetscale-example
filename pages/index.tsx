@@ -1,42 +1,29 @@
-import { Stytch } from '@stytch/stytch-react';
+import { SDKProductTypes, Stytch, StytchProps } from '@stytch/stytch-react';
 import styles from '../styles/Home.module.css';
 import { ServerSideProps } from '../lib/StytchSession';
 import { BASE_URL } from '../lib/constants';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const stytchProps = {
-  config: {
-    loginConfig: {
-      magicLinkUrl: `${BASE_URL}/api/authenticate_magic_link`,
-      expirationMinutes: 30,
-    },
-    createUserConfig: {
-      magicLinkUrl: `${BASE_URL}/api/authenticate_magic_link`,
-      expirationMinutes: 30,
+const stytchProps: StytchProps = {
+  loginOrSignupView: {
+    products: [SDKProductTypes.emailMagicLinks],
+    emailMagicLinksOptions: {
+      loginRedirectURL: `${BASE_URL}/api/authenticate_magic_link`,
+      loginExpirationMinutes: 30,
+      signupRedirectURL: `${BASE_URL}/api/authenticate_magic_link`,
+      signupExpirationMinutes: 30,
     },
   },
   style: {
     fontFamily: '"Helvetica New", Helvetica, sans-serif',
-    button: {
-      backgroundColor: '#0577CA',
-    },
-    input: {
-      textColor: '#090909',
-    },
+    primaryColor: '#19303D',
+    primaryTextColor: '#090909',
     width: '321px',
   },
   publicToken: process.env.NEXT_PUBLIC_STYTCH_PUBLIC_TOKEN || '',
-  url: process.env.NEXT_PUBLIC_STYTCH_JS_SDK_URL || 'https://js.stytch.com/stytch.js',
   callbacks: {
-    onEvent: (data: any) => {
-      if (data.eventData.type === 'USER_EVENT_TYPE') {
-        console.log({
-          userId: data.eventData.userId,
-          email: data.eventData.email,
-        });
-      }
-    },
+    onEvent: (data: any) => console.log(data),
     onSuccess: (data: any) => console.log(data),
     onError: (data: any) => console.log(data),
   },
@@ -51,7 +38,7 @@ const App = (props: Props) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (token ) {
+    if (token) {
       router.push('/profile');
     }
   });
@@ -61,10 +48,9 @@ const App = (props: Props) => {
       <div className={styles.container}>
         <Stytch
           publicToken={stytchProps.publicToken}
-          config={stytchProps.config}
+          loginOrSignupView={stytchProps.loginOrSignupView}
           style={stytchProps.style}
           callbacks={stytchProps.callbacks}
-          _url={stytchProps.url}
         />
       </div>
     </div>

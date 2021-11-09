@@ -9,8 +9,6 @@ import {
   TableRow,
   TableFooter,
   TableContainer,
-  InputLabel,
-  TextField,
   DialogContent,
   DialogTitle,
   IconButton,
@@ -22,28 +20,27 @@ import styles from '../styles/Home.module.css';
 import InviteForm from './InviteForm';
 
 type Props = {
-  users: User[];
+  users: User[] | undefined;
   deleteUser: (id: number) => void;
   toggle: () => void;
   isOpen: boolean;
-  submit: () => void;
+  submitUser: () => void;
   setName: (name: string) => void;
-  setEmail: (name: string) => void;
+  setEmail: (email: string) => void;
 };
 
 const UsersTable = (props: Props) => {
-  const { users, toggle, isOpen, submit, setName, setEmail, deleteUser } = props;
-
+  const { users, toggle, isOpen, submitUser, setName, setEmail, deleteUser } = props;
   return (
-    <TableContainer>
-      <Table stickyHeader className={styles.table}>
+    <TableContainer className={styles.table}>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell>
-              <b>Name </b>
+              <b>Name</b>
             </TableCell>
             <TableCell>
-              <b> Email </b>
+              <b>Email</b>
             </TableCell>
             <TableCell> </TableCell>
           </TableRow>
@@ -67,19 +64,19 @@ const UsersTable = (props: Props) => {
           )}
 
           <TableRow>
-            <TableFooter
-              style={{
-                position: 'absolute',
-              }}
-            >
+            <TableFooter>
               <Button className={styles.submitBtn} startIcon={<AddIcon />} onClick={toggle} size="small">
                 Invite
               </Button>
             </TableFooter>
             <Dialog open={isOpen} onClose={toggle}>
               <DialogTitle>Invite</DialogTitle>
-              <DialogContent>
-                <InviteForm setName={setName} setEmail={setEmail} submit={submit} />
+              <DialogContent className={styles.inviteForm}>
+                <InviteForm
+                  setName={setName}
+                  setEmail={setEmail}
+                  submit={submitUser}
+                />
               </DialogContent>
             </Dialog>
           </TableRow>
