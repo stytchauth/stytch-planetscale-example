@@ -20,8 +20,8 @@ export async function addUser(name: string, email: string) {
   const resp = await fetch(`${BASE_URL}/api/users`, {
     method: 'POST',
     body: JSON.stringify({
-      name: name,
-      email: email,
+      name,
+      email,
     }),
   });
   const data = await resp.json();
@@ -30,14 +30,14 @@ export async function addUser(name: string, email: string) {
 
 export const getUsers = async (token: string) => {
   // we pass the token in because redirects do not immediately update the cookie
-  //getUsers is the only functi being used with a redirect
+  // getUsers is the only function being used after a redirect
   const resp = await fetch(`${BASE_URL}/api/users?token=${token}`, {
-method: 'GET',
+    method: 'GET',
   });
   return resp;
 };
 
-export const signOut = async () => {
+export const logout = async () => {
   const resp = await fetch('/api/logout', { method: 'POST' });
   return resp;
 };

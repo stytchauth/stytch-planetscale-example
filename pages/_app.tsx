@@ -18,7 +18,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <a href="https://stytch.com" rel="noopener noreferrer" target="_blank">
           <Image alt="Stytch logo" height={20} src={logo} width={105} />
         </a>
-        <span className={styles.accountNavItem}>Account</span>
+        <span className={styles.accountNavItem}>
+          <a href="http://stytch.com/dashboard" rel="noopener noreferrer" target="_blank">
+            Stytch account
+          </a>
+        </span>
       </div>
       <div className={styles.root}>
         <Component {...pageProps} />
