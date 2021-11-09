@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "pscale connect your-db-name main --execute 'next dev'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -15,20 +15,24 @@
     "lint"
   ],
   "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/utils": "^4.11.2",
     "@mui/icons-material": "^5.0.1",
     "@mui/material": "^5.0.2",
-    "@stytch/stytch-react": "^1.1.6",
+    "@stytch/stytch-react": "^3.0.1",
     "cookie": "^0.4.1",
     "cookies": "^0.8.0",
     "material-icons": "^1.6.1",
-    "next": "11.1.2",
-    "planetscale-node": "^0.1.0",
+    "next": "12.0.2",
+    "mysql": "^2.18.1",
+    "planetscale-node": "^0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "stytch": "^3.4.0"
+    "stytch": "^3.4.0",
+    "util": "^0.12.4"
   },
   "devDependencies": {
     "@types/react": "17.0.25",
