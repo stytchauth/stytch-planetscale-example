@@ -99,6 +99,8 @@ npm install
 yarn install
 ```
 
+Replace `your-db-name` on line #6 in the `package.json` with the name of your planetscale database name.
+
 You can run a development server using:
 
 ```bash

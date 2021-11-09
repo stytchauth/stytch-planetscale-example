@@ -16,13 +16,12 @@ export async function deleteUserById(id: number) {
   return data;
 }
 
-export async function addUser(name: string, email: string, password: string) {
+export async function addUser(name: string, email: string) {
   const resp = await fetch(`${BASE_URL}/api/users`, {
     method: 'POST',
     body: JSON.stringify({
       name,
       email,
-      password,
     }),
   });
   const data = await resp.json();
