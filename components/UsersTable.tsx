@@ -9,8 +9,6 @@ import {
   TableRow,
   TableFooter,
   TableContainer,
-  InputLabel,
-  TextField,
   DialogContent,
   DialogTitle,
   IconButton,
@@ -74,7 +72,11 @@ const UsersTable = (props: Props) => {
             <Dialog open={isOpen} onClose={toggle}>
               <DialogTitle>Invite</DialogTitle>
               <DialogContent className={styles.inviteForm}>
-                <InviteForm setName={setName} setEmail={setEmail} submit={submitUser} />
+                <InviteForm
+                  setName={setName}
+                  setEmail={setEmail}
+                  submit={submitUser}
+                />
               </DialogContent>
             </Dialog>
           </TableRow>

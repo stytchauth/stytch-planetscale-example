@@ -6,6 +6,7 @@ import { OkPacket } from 'mysql2';
 const URL = process.env.DATABASE_URL as string;
 const sqlConn = mysql.createConnection(URL);
 sqlConn.connect();
+
 export interface User {
   id: number;
   email: string;
