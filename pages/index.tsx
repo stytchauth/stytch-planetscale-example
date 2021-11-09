@@ -13,7 +13,7 @@ const stytchProps: StytchProps = {
       loginExpirationMinutes: 30,
       signupRedirectURL: `${BASE_URL}/api/authenticate_magic_link`,
       signupExpirationMinutes: 30,
-    }
+    },
   },
   style: {
     fontFamily: '"Helvetica New", Helvetica, sans-serif',

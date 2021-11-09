@@ -4,7 +4,7 @@ import { serialize } from 'cookie';
 
 type Data = {
   error?: string;
-  message?:string;
+  message?: string;
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {

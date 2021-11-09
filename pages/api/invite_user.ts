@@ -5,7 +5,7 @@ import { BASE_URL } from '../../lib/constants';
 
 type Data = {
   error?: string;
-  message?:string;
+  message?: string;
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -27,7 +27,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
   const client = loadStytch();
 
-  var body = JSON.parse(req.body)
+  var body = JSON.parse(req.body);
   var email = body.email;
 
   // params are of type stytch.LoginOrCreateRequest
@@ -39,7 +39,7 @@ async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     await client.magicLinks.email.loginOrCreate(params);
-    res.status(200).json({"message":"magic link sent"});
+    res.status(200).json({ message: 'magic link sent' });
   } catch (error) {
     res.status(400).json({ error });
   }

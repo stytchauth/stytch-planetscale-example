@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql from 'mysql2';
-import { OkPacket } from "mysql2";
+import { OkPacket } from 'mysql2';
 import { validSessionToken } from '../../../../lib/StytchSession';
 
 const URL = process.env.DATABASE_URL as string;
-const sqlConn = mysql.createConnection(URL)
-sqlConn.connect()
+const sqlConn = mysql.createConnection(URL);
+sqlConn.connect();
 
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
   var token = (req.query['token'] || req.cookies[process.env.COOKIE_NAME as string]) as string;
@@ -18,29 +18,29 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === 'GET') {
-    getUser( req, res);
+    getUser(req, res);
   } else if (req.method === 'DELETE') {
-    deleteUser( req, res);
+    deleteUser(req, res);
   }
   return;
 }
 
 //getUser get a single user
-async function getUser( req: NextApiRequest, res: NextApiResponse) {
+async function getUser(req: NextApiRequest, res: NextApiResponse) {
   try {
     var query = 'select * from users WHERE id=?';
     var params = [req.query['uid']];
 
     var user;
-    const result = await sqlConn.promise().query(query, params).then(
-      (([row])=> {
-        console.log(row)
-        user = row
-      })
-    )
+    const result = await sqlConn
+      .promise()
+      .query(query, params)
+      .then(([row]) => {
+        console.log(row);
+        user = row;
+      });
 
-
-    res.status(200).json({user});
+    res.status(200).json({ user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'an error occurred' });
@@ -56,14 +56,16 @@ async function deleteUser(req: NextApiRequest, res: NextApiResponse) {
 
     var status = 200;
 
-    const result = await sqlConn.promise().query(query, params).then (
-      (([row]) => { 
-      if  ((<OkPacket> row).affectedRows == 0){
-        status = 304
-      }
-    }));
-    
-    res.status(status).json({ "message":"success" });
+    const result = await sqlConn
+      .promise()
+      .query(query, params)
+      .then(([row]) => {
+        if ((<OkPacket>row).affectedRows == 0) {
+          status = 304;
+        }
+      });
+
+    res.status(status).json({ message: 'success' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'an error occurred' });

@@ -60,7 +60,7 @@ const Profile = (props: Props) => {
     if (!name || !email) {
       toggleInviteModal();
       window.alert('one or more input field is empty');
-      return
+      return;
     }
 
     //invite the user via stytch
