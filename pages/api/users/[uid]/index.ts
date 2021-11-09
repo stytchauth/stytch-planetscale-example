@@ -36,7 +36,6 @@ async function getUser(req: NextApiRequest, res: NextApiResponse) {
       .promise()
       .query(query, params)
       .then(([row]) => {
-        console.log(row);
         user = row;
       });
 

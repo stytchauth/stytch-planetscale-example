@@ -56,6 +56,7 @@ const Profile = (props: Props) => {
   };
 
   const submitUser = async () => {
+    window.alert("submit user clicked")
     //if the form is empty, close the modal
     if (!name || !email) {
       toggleInviteModal();
@@ -70,12 +71,11 @@ const Profile = (props: Props) => {
       toggleSubmitAlert();
 
       const inviteResp = await inviteUser(email);
-      //log the user out if the response is 200
+      //log the user out if the response is 401
       if (inviteResp.status === 401) {
-        console.log('destroying session');
         destroy();
         return;
-      }
+      } 
 
       //add user to DB
       const addResp = await addUser(name, email);
