@@ -56,7 +56,6 @@ const Profile = (props: Props) => {
   };
 
   const submitUser = async () => {
-    window.alert("submit user clicked")
     //if the form is empty, close the modal
     if (!name || !email) {
       toggleInviteModal();
