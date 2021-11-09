@@ -27,7 +27,8 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 async function inviteUser(req: NextApiRequest, res: NextApiResponse) {
   const client = loadStytch();
 
-  var email = req.body.email;
+  var body = JSON.parse(req.body)
+  var email = body.email;
 
   // params are of type stytch.LoginOrCreateRequest
   const params = {

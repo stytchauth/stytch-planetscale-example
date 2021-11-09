@@ -26,14 +26,13 @@ type Props = {
   deleteUser: (id: number) => void;
   toggle: () => void;
   isOpen: boolean;
-  submit: () => void;
+  submitUser: () => void;
   setName: (name: string) => void;
-  setEmail: (name: string) => void;
+  setEmail: (email: string) => void;
 };
 
 const UsersTable = (props: Props) => {
-  const { users, toggle, isOpen, submit, setName, setEmail, deleteUser } = props;
-
+  const { users, toggle, isOpen, submitUser, setName, setEmail, deleteUser } = props;
   return (
     <TableContainer className={styles.table}>
       <Table stickyHeader>
@@ -78,6 +77,7 @@ const UsersTable = (props: Props) => {
                 <InviteForm
                   setName={setName}
                   setEmail={setEmail}
+                  submit={submitUser}
                 />
               </DialogContent>
             </Dialog>

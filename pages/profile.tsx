@@ -5,7 +5,7 @@ import Notification from '../components/Notification';
 import UsersTable from '../components/UsersTable';
 import { User } from '../pages/api/users/';
 import { ServerSideProps } from '../lib/StytchSession';
-import { inviteUser, isValidEmail } from '../lib/inviteUtils';
+import { inviteUser } from '../lib/inviteUtils';
 import { getUsers, addUser, deleteUserById, logout } from '../lib/usersUtils';
 import { useRouter } from 'next/router';
 
@@ -59,17 +59,12 @@ const Profile = (props: Props) => {
     //if the form is empty, close the modal
     if (!name || !email) {
       toggleInviteModal();
-      console.error('one or more input field is empty');
+      window.alert('one or more input field is empty');
       return
     }
 
     //invite the user via stytch
     try {
-      if (!isValidEmail(email)) {
-        console.error('email format is invalid');
-        return
-      }
-
       //closes modal and opens popup
       toggleInviteModal();
       toggleSubmitAlert();
@@ -83,7 +78,7 @@ const Profile = (props: Props) => {
       }
 
       //add user to DB
-      const addResp = await addUser(name, email, 'temp');
+      const addResp = await addUser(name, email);
       if (addResp.status !== 201) {
         console.error(addResp);
         return;
@@ -139,7 +134,7 @@ const Profile = (props: Props) => {
               deleteUser={deleteUser}
               toggle={toggleInviteModal}
               isOpen={openInviteModal}
-              submit={submitUser}
+              submitUser={submitUser}
             />
           </StytchContainer>
           <button className={styles.primaryButton} onClick={destroy}>
@@ -163,7 +158,7 @@ const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   return {
     props: {
       token: req.cookies[process.env.COOKIE_NAME as string] || '',
-      users: usersJSON,
+      users: usersJSON.users,
       authenticated: authenticated,
     },
   };

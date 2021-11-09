@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "pscale connect stytch-planetscale-nextjs main --execute 'next dev'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -26,11 +26,13 @@
     "cookie": "^0.4.1",
     "cookies": "^0.8.0",
     "material-icons": "^1.6.0",
+    "mysql": "^2.18.1",
     "next": "11.1.2",
-    "planetscale-node": "^0.1.0",
+    "planetscale-node": "^0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "stytch": "^3.4.0"
+    "stytch": "^3.4.0",
+    "util": "^0.12.4"
   },
   "devDependencies": {
     "@types/react": "17.0.25",
