@@ -31,7 +31,7 @@
     "planetscale-node": "^0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "stytch": "^3.4.0",
+    "stytch": "^9.0.6",
     "util": "^0.12.4"
   },
   "devDependencies": {
