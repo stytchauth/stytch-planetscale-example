@@ -7,7 +7,7 @@ This is a [Stytch](https://stytch.com) + [Planetscale](https://planetscale.com/)
 
 This example app was created to demonstrate a lightweight fullstack user administration app using Planetscale's serverless MYSQL database and Stytch's authentication + session management APIs.
 
-If you run into any problems or need some help while working on your Stytch + Planetscale integraiton, reach out to us at support@stytch.com or ask in our [community Slack](https://stytch.slack.com/join/shared_invite/zt-2f0fi1ruu-ub~HGouWRmPARM1MTwPESA))!
+If you run into any problems or need some help while working on your Stytch + Planetscale integraiton, reach out to us at support@stytch.com or ask in our [community Slack](https://stytch.com/docs/resources/support/overview))!
 
 Stytch
 ---
